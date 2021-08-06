@@ -32,9 +32,20 @@ const Login = ({Service}) => {
 
         await Service.login(data)
             .then(res => {
+
+                document.querySelectorAll('input').forEach(
+                    item => item.style.border = '1px solid #ced4da'
+                );
+
                 if (res.detail) {
                     setShow(true);
                     document.querySelector('#error').textContent = res.detail;
+
+                    if (res.detail.toLowerCase().indexOf('user') + 1) {
+                        document.querySelector('[name="username"]').style.border = '1px solid #e50707';
+                    } else if (res.detail.toLowerCase().indexOf('password') + 1) {
+                        document.querySelector('[name="password"]').style.border = '1px solid #e50707';
+                    }
                 } else {
                     setToken(res.access_token);
                     window.location.href = '/';

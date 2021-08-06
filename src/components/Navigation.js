@@ -1,10 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import {Link} from "react-router-dom";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {Container, Nav, Navbar, NavbarBrand, NavDropdown, NavLink} from "react-bootstrap";
 
+import {deleteToken, GetToken} from "../Tokens";
+
 const Navigation = () => {
+
+    const [auth, setAuth] = useState(false);
+
+    useEffect(() => {
+        if (GetToken()) {
+            setAuth(true);
+        }
+    });
+
+    const logout = (event) => {
+        event.preventDefault();
+        deleteToken();
+        setAuth(false);
+    }
 
     return (
         <Navbar bg="light" expand="lg">
@@ -16,9 +32,25 @@ const Navigation = () => {
                     <Nav className="me-auto">
                         <NavLink><Link className="link" to="/">Home</Link></NavLink>
                         <NavDropdown id="auth-dropdown" title="Auth">
-                            <NavDropdown.Item><Link className="link" to="/register">Registration</Link></NavDropdown.Item>
-                            <NavDropdown.Item><Link className="link" to="/login">Login</Link></NavDropdown.Item>
-                            <NavDropdown.Item><span className="link">Logout</span></NavDropdown.Item>
+                            {
+                                !auth ? (
+                                    <>
+                                        <NavDropdown.Item>
+                                            <Link className="link" to="/register">Registration</Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <Link className="link" to="/login">Login</Link>
+                                        </NavDropdown.Item>
+                                    </>
+                                ) : (
+                                    <>
+                                        <NavDropdown.Item>
+                                            <span className="link" onClick={logout}>Logout</span>
+                                        </NavDropdown.Item>
+                                    </>
+                                )
+                            }
+
                         </NavDropdown>
                     </Nav>
                 </NavbarCollapse>

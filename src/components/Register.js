@@ -32,12 +32,33 @@ const Register = ({Service}) => {
 
         await Service.register(data)
             .then(res => {
+
+                document.querySelectorAll('input').forEach(
+                    item => item.style.border = '1px solid #ced4da'
+                );
+
                 if (res.detail) {
                     setShow(true);
                     if (typeof res.detail === 'object') {
-                       document.querySelector('#error').textContent = res.detail[0].msg;
+                        document.querySelector('#error').textContent = res.detail[0].msg;
+
+                        if (res.detail[0].msg.toLowerCase().indexOf('not match') + 1) {
+                            document.querySelector('[name="password"]').style.border = '1px solid #e50707';
+                            document.querySelector('[name="confirm_password"]').style.border = '1px solid #e50707';
+                        } else if (res.detail[0].msg.toLowerCase().indexOf('password') + 1) {
+                            document.querySelector('[name="password"]').style.border = '1px solid #e50707';
+                        } else if (res.detail[0].msg.toLowerCase().indexOf('email') + 1) {
+                            document.querySelector('[name="email"]').style.border = '1px solid #e50707';
+                        }
+
                     } else {
                         document.querySelector('#error').textContent = res.detail;
+
+                        if (res.detail.toLowerCase().indexOf('user') + 1) {
+                            document.querySelector('[name="username"]').style.border = '1px solid #e50707';
+                        } else if (res.detail.toLowerCase().indexOf('email') + 1) {
+                            document.querySelector('[name="email"]').style.border = '1px solid #e50707';
+                        }
                     }
                 } else {
                     window.location.href = '/login';
