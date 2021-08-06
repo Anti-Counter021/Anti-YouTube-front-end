@@ -61,4 +61,16 @@ export default class Services {
         return await res.json();
     }
 
+    resetPasswordRequest = async (email) => {
+        return await this.httpRequest(
+            {method: 'GET', url: `auth/request-password-reset?email=${email}`}
+        );
+    }
+
+    resetPassword = async (data, token) => {
+        return await this.httpRequest(
+            {method: 'POST', url: `auth/password-reset?token=${token}`, data}
+        );
+    };
+
 }

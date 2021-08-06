@@ -136,7 +136,11 @@ const ChangeProfile = ({Service}) => {
                             <Form.Label>Avatar<span className="required">*</span></Form.Label>
                             <Form.Control required name="avatar" type="file"/>
                             <h3 className="mt-3">Current avatar</h3>
-                            <Image className="avatar-big" src={`http://localhost:8000/api/v1/${data.avatar}`} rounded/>
+                            {
+                                data.avatar ? (
+                                    <Image className="avatar-big" src={`http://localhost:8000/api/v1/${data.avatar}`} rounded/>
+                                ) : null
+                            }
                         </Form.Group>
 
                         <Button id="btn-avatar" className="mt-3" variant="success" type="submit">
