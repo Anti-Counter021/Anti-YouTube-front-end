@@ -43,4 +43,22 @@ export default class Services {
         return await this.httpRequest({method: 'PUT', url: 'auth/change-data', token, data});
     }
 
+    uploadAvatar = async (data, token) => {
+        const res = await fetch(`${this._url}auth/avatar`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!res.ok) {
+            if (res.status !== 400) {
+                throw new Error(`Error auth/avatar, Status = ${res.status}`);
+            }
+        }
+
+        return await res.json();
+    }
+
 }
