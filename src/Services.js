@@ -3,7 +3,7 @@ export default class Services {
     _url = 'http://localhost:8000/api/v1/'
 
     async httpRequest({method, url, token, data}) {
-        const token_auth = token ? {'Authorization': `Token ${token}`} : {};
+        const token_auth = token ? {'Authorization': `Bearer ${token}`} : {};
         const body_data = data ? {body: JSON.stringify(data)} : {};
         const res = await fetch(this._url + url, {
             method: method,
@@ -33,6 +33,14 @@ export default class Services {
 
     activate = async (token) => {
         return await this.httpRequest({method: 'POST', url: 'auth/activate', data: {uuid: token}});
+    }
+
+    getProfileChangeData = async (token) => {
+        return await this.httpRequest({method: 'GET', url: 'auth/change-data', token});
+    }
+
+    putProfileChangeData = async (token, data) => {
+        return await this.httpRequest({method: 'PUT', url: 'auth/change-data', token, data});
     }
 
 }
