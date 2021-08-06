@@ -27,4 +27,8 @@ export default class Services {
         return await this.httpRequest({method: 'POST', url: 'auth/register', data});
     }
 
+    login = async (data) => {
+        return await this.httpRequest({method: 'POST', url: 'auth/login', data});
+    }
+
 }

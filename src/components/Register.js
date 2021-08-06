@@ -4,18 +4,24 @@ import {Redirect} from "react-router-dom";
 import {Form, FormGroup, Container, Row, FormLabel, FormControl, FormCheck, Button, Alert} from "react-bootstrap";
 
 import {GetToken} from "../Tokens";
-import WithService from "./WithService";
 import Navigation from "./Navigation";
+import WithService from "./WithService";
 
 const Register = ({Service}) => {
 
+    const [redirect, setRedirect] = useState(false);
+
     useEffect(() => {
         if (GetToken()) {
-            return (<Redirect to='/'/>);
+            setRedirect(true);
         }
-    });
+    }, []);
 
     const [show, setShow] = useState(false);
+
+    if (redirect) {
+        return (<Redirect to='/'/>);
+    }
 
     const registration = async (event) => {
         event.preventDefault();
@@ -66,17 +72,17 @@ const Register = ({Service}) => {
                         }
 
                         <FormGroup>
-                            <FormLabel>Username</FormLabel>
+                            <FormLabel>Username<span className="required">*</span></FormLabel>
                             <FormControl required name="username" type="text" placeholder="Enter username"/>
                         </FormGroup>
 
                         <FormGroup>
-                            <FormLabel>Email address</FormLabel>
+                            <FormLabel>Email address<span className="required">*</span></FormLabel>
                             <FormControl required name="email" type="email" placeholder="Enter email"/>
                         </FormGroup>
 
                         <FormGroup>
-                            <FormLabel>About</FormLabel>
+                            <FormLabel>About<span className="required">*</span></FormLabel>
                             <FormControl required name="about" type="text" placeholder="About"/>
                         </FormGroup>
 
@@ -85,18 +91,19 @@ const Register = ({Service}) => {
                         </FormGroup>
 
                         <FormGroup>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>Password<span className="required">*</span></FormLabel>
                             <FormControl required name="password" type="password" placeholder="Password"/>
                         </FormGroup>
 
                         <FormGroup>
-                            <FormLabel>Confirm password</FormLabel>
+                            <FormLabel>Confirm password<span className="required">*</span></FormLabel>
                             <FormControl required name="confirm_password" type="password" placeholder="Confirm password"/>
                         </FormGroup>
 
                         <Button id="btn-register" className="mt-3" variant="success" type="submit">
                             Register
                         </Button>
+
                     </Form>
                 </Row>
             </Container>

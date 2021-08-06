@@ -1,10 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 import {Link} from "react-router-dom";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {Container, Nav, Navbar, NavbarBrand, NavDropdown, NavLink} from "react-bootstrap";
-
-import {GetToken} from "../Tokens";
 
 const Navigation = () => {
 
