@@ -10,7 +10,6 @@ import NavbarToggle from "react-bootstrap/NavbarToggle";
 const Navigation = () => {
 
     const [auth, setAuth] = useState(false);
-    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         if (GetToken()) {
@@ -22,11 +21,7 @@ const Navigation = () => {
         event.preventDefault();
         deleteToken();
         setAuth(false);
-        setRedirect(true);
-    }
-
-    if (redirect) {
-        return (<Redirect to='/'/>);
+        window.location.href = '/';
     }
 
     return (
@@ -48,6 +43,9 @@ const Navigation = () => {
                                         </NavDropdown.Item>
                                         <NavDropdown.Item>
                                             <Link className="link" to="/login">Login</Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <Link className="link" to="/request-password-reset">Reset password</Link>
                                         </NavDropdown.Item>
                                     </>
                                 ) : (
