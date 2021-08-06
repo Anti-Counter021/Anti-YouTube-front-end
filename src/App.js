@@ -1,6 +1,7 @@
 import {Route, Switch} from "react-router-dom";
 
 import Home from "./components/Home";
+import Video from "./components/Video";
 import Login from "./components/Login";
 import Activate from "./components/Activate";
 import Category from "./components/Category";
@@ -14,16 +15,8 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
-                <Route path='/categories/:category_id' render={
-                    ({match}) => {
-                        return (<Category category_id={match.params.category_id}/>);
-                    }
-                }/>
-                <Route path='/videos/:video_id' render={
-                    ({match}) => {
-                        return (<Category video_id={match.params.video_id}/>);
-                    }
-                }/>
+                <Route path='/categories/:category_id' component={Category}/>
+                <Route path='/videos/:video_id' component={Video}/>
                 <Route path='/verify' component={Activate}/>
                 <Route path='/password-reset' component={ResetPassword}/>
                 <Route exact path='/request-password-reset' component={ResetPasswordRequest}/>

@@ -40,7 +40,6 @@ const Category = ({Service}) => {
                                             id,
                                             title,
                                             preview_file,
-                                            description,
                                             views,
                                             created_at,
                                             user: {username, avatar},
@@ -59,9 +58,6 @@ const Category = ({Service}) => {
                                                 </Link>
                                                 <Card.Body>
                                                     <Card.Title className="text-center">{title}</Card.Title>
-                                                    <Card.Text>
-                                                        {description}
-                                                    </Card.Text>
                                                 </Card.Body>
 
                                                 <ListGroup>

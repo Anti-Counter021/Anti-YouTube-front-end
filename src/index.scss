@@ -28,13 +28,25 @@
 }
 
 .thumbnail {
-    max-width: 250px;
-    max-height: 270px;
+    width: 250px;
+    height: 230px;
     padding: 8px;
-    margin: auto;
+    margin-left: 4px;
 }
 
-@media (max-width: 450px) {
+.video {
+    background: #0a0a0a;
+    padding: 10px;
+    border-radius: 15px;
+    -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+#like, #dislike {
+    cursor: pointer;
+}
+
+@media (max-width: 525px) {
     .avatar-big {
         max-width: 300px;
         max-height: 300px;

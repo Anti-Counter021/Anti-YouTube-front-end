@@ -81,4 +81,12 @@ export default class Services {
         return await this.httpRequest({method: 'GET', url: `categories/${category_id}`});
     }
 
+    video = async (video_id) => {
+        return await this.httpRequest({method: 'GET', url: `videos/${video_id}`})
+    }
+
+    vote = async (data, token) => {
+        return await this.httpRequest({method: 'POST', url: 'videos/vote', data, token});
+    }
+
 }
