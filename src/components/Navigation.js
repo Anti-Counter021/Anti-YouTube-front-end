@@ -1,21 +1,29 @@
 import React, {useEffect, useState} from "react";
 
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
+import NavbarToggle from "react-bootstrap/NavbarToggle";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {Container, Nav, Navbar, NavbarBrand, NavDropdown, NavLink} from "react-bootstrap";
 
+import WithServices from "./WithService";
 import {deleteToken, GetToken} from "../Tokens";
-import NavbarToggle from "react-bootstrap/NavbarToggle";
 
-const Navigation = () => {
+const Navigation = ({Service}) => {
 
     const [auth, setAuth] = useState(false);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         if (GetToken()) {
             setAuth(true);
         }
     });
+
+    useEffect(() => {
+        Service.categories()
+            .then(res => setCategories(res))
+            .catch(error => console.log(error));
+    }, []);
 
     const logout = (event) => {
         event.preventDefault();
@@ -35,6 +43,7 @@ const Navigation = () => {
                     <Nav className="me-auto">
                         <NavLink><Link className="link" to="/">Home</Link></NavLink>
                         <NavDropdown id="auth-dropdown" title="Auth">
+
                             {
                                 !auth ? (
                                     <>
@@ -61,6 +70,18 @@ const Navigation = () => {
                             }
 
                         </NavDropdown>
+
+                        <NavDropdown id="categories-dropdown" title="Categories">
+                            {
+                                categories ? (
+                                    categories.map(({name, id}) => (
+                                        <NavDropdown.Item key={id}>
+                                            <Link className="link" to={`/categories/${id}`}>{name}</Link>
+                                        </NavDropdown.Item>
+                                    ))
+                                ) : null
+                            }
+                        </NavDropdown>
                     </Nav>
                 </NavbarCollapse>
             </Container>
@@ -69,4 +90,4 @@ const Navigation = () => {
 
 };
 
-export default Navigation;
+export default WithServices()(Navigation);

@@ -17,6 +17,23 @@
     max-height: 400px;
 }
 
+.avatar {
+    max-width: 80px;
+    max-height: 80px;
+    margin: 0 20px;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.thumbnail {
+    max-width: 250px;
+    max-height: 270px;
+    padding: 8px;
+    margin: auto;
+}
+
 @media (max-width: 450px) {
     .avatar-big {
         max-width: 300px;

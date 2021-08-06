@@ -71,6 +71,14 @@ export default class Services {
         return await this.httpRequest(
             {method: 'POST', url: `auth/password-reset?token=${token}`, data}
         );
-    };
+    }
+
+    categories = async () => {
+        return await this.httpRequest({method: 'GET', url: 'categories/'});
+    }
+
+    category = async (category_id) => {
+        return await this.httpRequest({method: 'GET', url: `categories/${category_id}`});
+    }
 
 }
