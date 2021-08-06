@@ -31,4 +31,8 @@ export default class Services {
         return await this.httpRequest({method: 'POST', url: 'auth/login', data});
     }
 
+    activate = async (token) => {
+        return await this.httpRequest({method: 'POST', url: 'auth/activate', data: {uuid: token}});
+    }
+
 }
