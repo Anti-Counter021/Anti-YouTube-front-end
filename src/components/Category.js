@@ -4,6 +4,7 @@ import Moment from "react-moment";
 import {Link} from "react-router-dom";
 import {Badge, Card, CardImg, Container, Image, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 
+import {SITE} from "../Services";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
 
@@ -53,7 +54,7 @@ const Category = ({Service}) => {
                                                     <CardImg
                                                         className="thumbnail"
                                                         variant="top"
-                                                        src={`http://localhost:8000/api/v1/${preview_file}`}
+                                                        src={`${SITE}${preview_file}`}
                                                     />
                                                 </Link>
                                                 <Card.Body>
@@ -75,7 +76,7 @@ const Category = ({Service}) => {
                                                         <Image
                                                             className="avatar"
                                                             rounded
-                                                            src={`http://localhost:8000/api/v1/${avatar}`}
+                                                            src={`${SITE}${avatar}`}
                                                         />
                                                     </ListGroupItem>
 

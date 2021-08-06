@@ -1,6 +1,10 @@
+const SITE = 'http://localhost:8000/api/v1/'
+
+export {SITE};
+
 export default class Services {
 
-    _url = 'http://localhost:8000/api/v1/'
+    _url = SITE
 
     async httpRequest({method, url, token, data}) {
         const token_auth = token ? {'Authorization': `Bearer ${token}`} : {};

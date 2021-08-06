@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import Moment from "react-moment";
 import {Alert, Badge, Button, Container, Image, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 
+import {SITE} from "../Services";
 import {GetToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
@@ -74,15 +75,15 @@ const Video = ({Service}) => {
                                 <div className="video">
                                     <video
                                         controls
-                                        poster={`http://localhost:8000/api/v1/${video.preview_file}`}
+                                        poster={`${SITE}${video.preview_file}`}
                                         className="container-fluid"
                                     >
                                         <source
-                                            src={`http://localhost:8000/api/v1/videos/video/${video.id}`}
+                                            src={`${SITE}videos/video/${video.id}`}
                                             type="video/mp4"
                                         />
                                         <source
-                                            src={`http://localhost:8000/api/v1/videos/video/${video.id}`}
+                                            src={`${SITE}videos/video/${video.id}`}
                                             type="video/webm"
                                         />
                                     </video>
@@ -109,7 +110,7 @@ const Video = ({Service}) => {
                                     <ListGroupItem>
                                         {video.user.username}
                                         <Image
-                                            src={`http://localhost:8000/api/v1/${video.user.avatar}`}
+                                            src={`${SITE}${video.user.avatar}`}
                                             className="avatar"
                                         />
                                     </ListGroupItem>

@@ -14,6 +14,7 @@ import {
     Row,
 } from "react-bootstrap";
 
+import {SITE} from "../Services";
 import {GetToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
@@ -138,7 +139,7 @@ const ChangeProfile = ({Service}) => {
                             <h3 className="mt-3">Current avatar</h3>
                             {
                                 data.avatar ? (
-                                    <Image className="avatar-big" src={`http://localhost:8000/api/v1/${data.avatar}`} rounded/>
+                                    <Image className="avatar-big" src={`${SITE}${data.avatar}`} rounded/>
                                 ) : null
                             }
                         </Form.Group>
