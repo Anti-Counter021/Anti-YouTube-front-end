@@ -27,9 +27,12 @@ const Video = ({Service}) => {
         Service.vote({vote, video_id}, GetToken())
             .then(res => setVideo(res))
             .catch(error => {
-                if (error.message.indexOf('401')) {
+                if (error.message.indexOf('401') + 1) {
                     setShow(true);
-                    document.querySelector('#error').textContent = 'Not authorized';
+                    document.querySelector('#error').textContent = 'You not authorized';
+                } else if (error.message.indexOf('403') + 1) {
+                    setShow(true);
+                    document.querySelector('#error').textContent = 'You not activated'
                 }
                 console.log(error);
             });
