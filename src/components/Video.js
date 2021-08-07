@@ -79,7 +79,7 @@ const Video = ({Service}) => {
             <Container>
                 {
                     video.id ? (
-                        <Row className="text-center">
+                        <Row className="text-center video-container">
                             <h1>{video.title}</h1>
                             {
                                 show ? (
@@ -163,10 +163,10 @@ const Video = ({Service}) => {
                                     <ListGroupItem>
                                         Votes:
                                         <span id="like" onClick={like}>
-                                            👍 <Badge pill bg="success">{video.votes.likes}</Badge>
+                                            <i class="fas fa-thumbs-up"/> <Badge pill bg="success">{video.votes.likes}</Badge>
                                         </span>
                                         <span id="dislike" onClick={dislike}>
-                                            👎 <Badge pill bg="danger">{video.votes.dislikes}</Badge>
+                                            <i class="fas fa-thumbs-down"/> <Badge pill bg="danger">{video.votes.dislikes}</Badge>
                                         </span>
                                     </ListGroupItem>
                                     <ListGroupItem>

@@ -33,12 +33,12 @@ const Navigation = ({Service}) => {
     }
 
     return (
-        <Navbar className="pb-5" bg="light" expand="lg">
+        <Navbar bg="danger" variant="dark" expand="lg">
             <Container>
                 <NavbarBrand>
-                    <Link style={{color: '#000'}} className="link" to="/">FastAPI Anti-YouTube</Link>
+                    <Link style={{color: '#fff'}} to="/">FastAPI Anti-YouTube</Link>
                 </NavbarBrand>
-                <NavbarToggle aria-controls="basic-navbar-nav" />
+                <NavbarToggle aria-controls="basic-navbar-nav"/>
                 <NavbarCollapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <NavLink><Link className="link" to="/">Home</Link></NavLink>
@@ -48,22 +48,22 @@ const Navigation = ({Service}) => {
                                 !auth ? (
                                     <>
                                         <NavDropdown.Item>
-                                            <Link className="link" to="/register">Registration</Link>
+                                            <Link to="/register">Registration</Link>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item>
-                                            <Link className="link" to="/login">Login</Link>
+                                            <Link to="/login">Login</Link>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item>
-                                            <Link className="link" to="/request-password-reset">Reset password</Link>
+                                            <Link to="/request-password-reset">Reset password</Link>
                                         </NavDropdown.Item>
                                     </>
                                 ) : (
                                     <>
                                         <NavDropdown.Item>
-                                            <Link className="link" to="/profile/change">Change profile</Link>
+                                            <Link to="/profile/change">Change profile</Link>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item>
-                                            <span className="link" onClick={logout}>Logout</span>
+                                            <span onClick={logout}>Logout</span>
                                         </NavDropdown.Item>
                                     </>
                                 )
@@ -76,7 +76,7 @@ const Navigation = ({Service}) => {
                                 categories ? (
                                     categories.map(({name, id}) => (
                                         <NavDropdown.Item key={id}>
-                                            <Link className="link" to={`/categories/${id}`}>{name}</Link>
+                                            <Link to={`/categories/${id}`}>{name}</Link>
                                         </NavDropdown.Item>
                                     ))
                                 ) : null
@@ -90,6 +90,9 @@ const Navigation = ({Service}) => {
                         }
 
                     </Nav>
+                </NavbarCollapse>
+                <NavbarCollapse className="justify-content-end">
+                    <NavLink><Link className="link" to="/profile"><i className="fas fa-user-circle"/></Link></NavLink>
                 </NavbarCollapse>
             </Container>
         </Navbar>

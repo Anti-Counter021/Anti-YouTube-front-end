@@ -1,9 +1,47 @@
-.link {
-    color: #8d8b8b;
+.link, #auth-dropdown, #categories-dropdown {
+    color: #fff;
     text-decoration: none;
 
     &:hover {
-        color: #000;
+        color: #fff;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ec3e89;
+    margin: 20px 0;
+}
+
+.navbar {
+    margin-bottom: 15px;
+}
+
+.card {
+    background: #dc2535;
+    -webkit-box-shadow: 0px 4px 15px 3px rgba(0, 0, 0, 0.82);
+    box-shadow: 0px 4px 15px 3px rgba(0, 0, 0, 0.82);
+    color: #fff;
+    border-radius: 10px;
+}
+
+.fa-user-circle {
+    font-size: 25px;
+}
+
+.fa-thumbs-up, .fa-thumbs-down {
+    margin-left: 7px;
+}
+
+.video-container {
+    background: #dc3545;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+
+    h1, h2, h3, h4, h5, h6, p {
+        color: #fff;
+        margin: 20px 0;
     }
 }
 
@@ -36,6 +74,10 @@ a {
     margin: 0 20px;
 }
 
+#error {
+    color: #000;
+}
+
 .author {
     font-weight: bold;
 }
@@ -44,15 +86,18 @@ a {
     width: 250px;
     height: 230px;
     padding: 8px;
-    margin-left: 4px;
+    
+    &-block {
+        text-align: center;
+    }
 }
 
 .video {
     background: #0a0a0a;
     padding: 10px;
     border-radius: 15px;
-    -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
-    box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
 #like, #dislike {

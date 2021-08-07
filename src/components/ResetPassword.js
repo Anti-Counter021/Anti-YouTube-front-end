@@ -47,7 +47,7 @@ const ResetPassword = ({Service}) => {
                     setShowSuccess(true);
                     document.querySelector('#success').textContent = res.msg;
                     setTimeout(() => {
-                        window.location.href = '/';
+                        window.location.href = '/login';
                     }, 1000);
                 } else if (res.detail) {
                     setShowError(true);

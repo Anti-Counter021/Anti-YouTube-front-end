@@ -117,6 +117,8 @@ const ChangeProfile = ({Service}) => {
 
                     <Form className="col-md-8 text-center" onSubmit={changeData}>
 
+                        <h2>Change data</h2>
+
                         <FormGroup>
                             <FormLabel>About<span className="required">*</span></FormLabel>
                             <FormControl
@@ -138,9 +140,12 @@ const ChangeProfile = ({Service}) => {
                                         </Badge>
                                     </>
                                 ) : (
-                                    <Badge pill bg="success" id="left-chars">
-                                        255
-                                    </Badge>
+                                    <>
+                                        Chars left&nbsp;
+                                        <Badge pill bg="success" id="left-chars">
+                                            255
+                                        </Badge>
+                                    </>
                                 )
                             }
                         </FormGroup>

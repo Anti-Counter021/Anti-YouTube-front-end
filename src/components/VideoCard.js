@@ -24,7 +24,7 @@ const VideoCard = (
         <div className="col-md-3 mb-2" key={id}>
 
             <Card>
-                <Link to={`/videos/${id}`}>
+                <Link to={`/videos/${id}`} className="thumbnail-block">
                     <CardImg
                         className="thumbnail"
                         variant="top"
@@ -53,8 +53,8 @@ const VideoCard = (
 
                     <ListGroupItem>
                         Votes:
-                        👍 <Badge pill bg="success">{likes}</Badge>
-                        👎 <Badge pill bg="danger">{dislikes}</Badge>
+                        <i class="fas fa-thumbs-up"/> <Badge pill bg="success">{likes}</Badge>
+                        <i class="fas fa-thumbs-down"/> <Badge pill bg="danger">{dislikes}</Badge>
                     </ListGroupItem>
 
                 </ListGroup>
