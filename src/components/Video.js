@@ -26,7 +26,14 @@ const Video = ({Service}) => {
 
     const to_vote = (vote) => {
         Service.vote({vote, video_id}, GetToken())
-            .then(res => setVideo(res))
+            .then(res => {
+                if (res.detail) {
+                    setShow(true);
+                    document.querySelector('#error').textContent = res.detail;
+                } else {
+                    setVideo(res);
+                }
+            })
             .catch(error => {
                 if (error.message.indexOf('401') + 1) {
                     setShow(true);
