@@ -33,7 +33,7 @@ const Navigation = ({Service}) => {
     }
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar className="pb-5" bg="light" expand="lg">
             <Container>
                 <NavbarBrand>
                     <Link style={{color: '#000'}} className="link" to="/">FastAPI Anti-YouTube</Link>
@@ -82,6 +82,13 @@ const Navigation = ({Service}) => {
                                 ) : null
                             }
                         </NavDropdown>
+
+                        {
+                            auth ? (
+                                <NavLink><Link className="link" to="/subscriptions">Subscriptions</Link></NavLink>
+                            ) : null
+                        }
+
                     </Nav>
                 </NavbarCollapse>
             </Container>

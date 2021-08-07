@@ -125,7 +125,11 @@ const ChangeProfile = ({Service}) => {
                                             {255 - data.about.length}
                                         </Badge>
                                     </>
-                                ) : null
+                                ) : (
+                                    <Badge pill bg="success" id="left-chars">
+                                        255
+                                    </Badge>
+                                )
                             }
                         </FormGroup>
 
@@ -165,7 +169,9 @@ const ChangeProfile = ({Service}) => {
                             {
                                 data.avatar ? (
                                     <Image className="avatar-big" src={`${SITE}${data.avatar}`} rounded/>
-                                ) : null
+                                ) : (
+                                    <Image className="avatar-big" src="https://via.placeholder.com/400x400" rounded/>
+                                )
                             }
                         </Form.Group>
 

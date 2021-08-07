@@ -8,6 +8,7 @@ import Activate from "./components/Activate";
 import Category from "./components/Category";
 import Register from "./components/Register";
 import ChangeProfile from "./components/ChangeProfile";
+import Subscriptions from "./components/Subscriptions";
 import ResetPassword from "./components/ResetPassword";
 import ResetPasswordRequest from "./components/ResetPasswordRequest";
 
@@ -24,6 +25,7 @@ const App = () => {
                 <Route exact path='/request-password-reset' component={ResetPasswordRequest}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path='/login' component={Login}/>
+                <Route exact path='/subscriptions' component={Subscriptions}/>
                 <Route exact path='/profile/change' component={ChangeProfile}/>
                 <Route path='/' component={Home}/>
             </Switch>

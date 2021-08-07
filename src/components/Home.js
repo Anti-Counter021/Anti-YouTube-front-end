@@ -40,7 +40,9 @@ const Home = ({Service}) => {
                                     />
                                 )
                             )
-                        ) : null
+                        ) : (
+                            <h3 className="text-center">No video yet</h3>
+                        )
                     }
                 </Row>
             </Container>

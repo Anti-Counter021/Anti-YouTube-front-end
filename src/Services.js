@@ -142,4 +142,8 @@ export default class Services {
         );
     }
 
+    subscriptions = async (token) => {
+        return await this.httpRequest({method: 'GET', url: 'auth/followed', token});
+    }
+
 }

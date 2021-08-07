@@ -19,7 +19,13 @@ const Channel = ({Service}) => {
 
     const getChannel = async () => {
         await Service.channel(channel_id, GetAccessToken())
-            .then(res => setChannel(res))
+            .then(res => {
+                if (res.detail && res.detail.indexOf('not found') + 1) {
+                    window.location.href = '/404';
+                } else {
+                    setChannel(res);
+                }
+            })
             .catch(error => console.log(error));
     }
 
@@ -73,7 +79,9 @@ const Channel = ({Service}) => {
                                 {
                                     channel.avatar ? (
                                         <Image rounded className="avatar-big" src={`${SITE}${channel.avatar}`}/>
-                                    ) : null
+                                    ) : (
+                                        <Image className="avatar-big" src="https://via.placeholder.com/400x400" rounded/>
+                                    )
                                 }
                             </div>
                             <div className="col-md-7">
@@ -165,7 +173,9 @@ const Channel = ({Service}) => {
                                             />
                                         )
                                     )
-                                ) : null
+                                ) : (
+                                    <h3 className="text-center">Not yet published</h3>
+                                )
                             }
                         </Row>
 

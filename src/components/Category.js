@@ -18,7 +18,11 @@ const Category = ({Service}) => {
     useEffect(async () => {
         await Service.category(category_id)
             .then(res => {
-                setCategory(res);
+                if (res.detail && res.detail.indexOf('not found') + 1) {
+                    window.location.href = '/404';
+                } else {
+                    setCategory(res);
+                }
             })
             .catch(error => console.log(error));
     }, [category_id]);

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 
 import Moment from "react-moment";
+import {Link} from "react-router-dom";
 import {Alert, Badge, Button, Container, Image, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 
 import {SITE} from "../Services";
-import {GetAccessToken, GetRefreshToken} from "../Tokens";
+import {GetAccessToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
 
@@ -19,7 +20,11 @@ const Video = ({Service}) => {
     useEffect(async () => {
         await Service.video(video_id)
             .then(res => {
-                setVideo(res);
+                if (res.detail && res.detail.indexOf('not found') + 1) {
+                    window.location.href = '/404';
+                } else {
+                    setVideo(res);
+                }
             })
             .catch(error => console.log(error));
     }, [video_id]);
@@ -107,7 +112,9 @@ const Video = ({Service}) => {
                                     </ListGroupItem>
 
                                     <ListGroupItem>
-                                        {video.category.name}
+                                        <Link to={`/categories/${video.category.id}`}>
+                                            {video.category.name}
+                                        </Link>
                                     </ListGroupItem>
 
                                     <ListGroupItem>
@@ -115,11 +122,24 @@ const Video = ({Service}) => {
                                     </ListGroupItem>
 
                                     <ListGroupItem>
-                                        {video.user.username}
-                                        <Image
-                                            src={`${SITE}${video.user.avatar}`}
-                                            className="avatar"
-                                        />
+                                        <Link to={`/channel/${video.user.id}`}>
+                                            {video.user.username}
+                                            {
+                                                video.user.avatar ? (
+                                                    <Image
+                                                        src={`${SITE}${video.user.avatar}`}
+                                                        rounded
+                                                        className="avatar"
+                                                    />
+                                                ) : (
+                                                    <Image
+                                                        className="avatar"
+                                                        rounded
+                                                        src="https://via.placeholder.com/80x80"
+                                                    />
+                                                )
+                                            }
+                                        </Link>
                                     </ListGroupItem>
 
                                     <ListGroupItem>

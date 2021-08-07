@@ -11,11 +11,21 @@ const VideoAuthor = ({user: {username, avatar, id}}) => {
         <ListGroupItem>
             <Link className="user-popup" to={`/channel/${id}`}>
                 Author: <span className="author">{username}</span>
-                <Image
-                    className="avatar"
-                    rounded
-                    src={`${SITE}${avatar}`}
-                />
+                {
+                    avatar ? (
+                        <Image
+                            className="avatar"
+                            rounded
+                            src={`${SITE}${avatar}`}
+                        />
+                    ) : (
+                        <Image
+                            className="avatar"
+                            rounded
+                            src="https://via.placeholder.com/80x80"
+                        />
+                    )
+                }
             </Link>
         </ListGroupItem>
     );
