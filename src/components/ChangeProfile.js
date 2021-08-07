@@ -14,6 +14,8 @@ import {
     Row,
 } from "react-bootstrap";
 
+import Error from "./Error";
+import Loading from "./Loading";
 import {SITE} from "../Services";
 import {GetAccessToken, GetRefreshToken} from "../Tokens";
 import Navigation from "./Navigation";
@@ -24,6 +26,8 @@ const ChangeProfile = ({Service}) => {
     const [redirect, setRedirect] = useState(false);
     const [data, setData] = useState({});
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         if (!GetRefreshToken()) {
@@ -32,17 +36,25 @@ const ChangeProfile = ({Service}) => {
     });
 
     useEffect(async () => {
+        setLoading(true);
         await Service.getProfileChangeData(GetAccessToken())
             .then(res => {
                 setData(res);
+                setLoading(false);
             })
-            .catch(error => {
-                console.log(error);
-            });
+            .catch(error => setError(true));
     }, []);
 
     if (redirect) {
         return (<Redirect to='/login'/>);
+    }
+
+    if (loading) {
+        return (<Loading/>);
+    }
+
+    if (error) {
+        return (<Error/>);
     }
 
     const changeData = async (event) => {

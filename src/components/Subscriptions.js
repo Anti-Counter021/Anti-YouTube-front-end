@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 
 import {Container, Row} from "react-bootstrap";
 
+import Error from "./Error";
+import Loading from "./Loading";
 import VideoCard from "./VideoCard";
 import Navigation from "./Navigation";
 import {GetAccessToken} from "../Tokens";
@@ -12,12 +14,26 @@ import {VideoCategory, VideoAuthor} from "./VideoCardComponents";
 const Subscriptions = ({Service}) => {
 
     const [subscriptions, setSubscriptions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(async () => {
+        setLoading(true);
         await Service.subscriptions(GetAccessToken())
-            .then(res => setSubscriptions(res))
-            .catch(error => console.log(error));
+            .then(res => {
+                setSubscriptions(res);
+                setLoading(false);
+            })
+            .catch(error => setError(true));
     }, []);
+
+    if (loading) {
+        return (<Loading/>);
+    }
+
+    if (error) {
+        return (<Error/>);
+    }
 
     return (
         <>

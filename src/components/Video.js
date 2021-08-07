@@ -4,6 +4,8 @@ import Moment from "react-moment";
 import {Link} from "react-router-dom";
 import {Alert, Badge, Button, Container, Image, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 
+import Error from "./Error";
+import Loading from "./Loading";
 import {SITE} from "../Services";
 import {GetAccessToken} from "../Tokens";
 import Navigation from "./Navigation";
@@ -13,21 +15,33 @@ const Video = ({Service}) => {
 
     const [video, setVideo] = useState({});
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const url = window.location.href.split('/');
     const video_id = url[url.length - 1];
 
     useEffect(async () => {
+        setLoading(true);
         await Service.video(video_id)
             .then(res => {
                 if (res.detail && res.detail.indexOf('not found') + 1) {
                     window.location.href = '/404';
                 } else {
                     setVideo(res);
+                    setLoading(false);
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => setError(true));
     }, [video_id]);
+
+    if (loading) {
+        return (<Loading/>);
+    }
+
+    if (error) {
+        return (<Error/>);
+    }
 
     const to_vote = async (vote) => {
         await Service.vote({vote, video_id}, GetAccessToken())

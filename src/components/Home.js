@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 
 import {Container, Row} from "react-bootstrap";
 
+import Error from "./Error";
+import Loading from "./Loading";
 import VideoCard from "./VideoCard";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
@@ -11,12 +13,26 @@ import {VideoAuthor, VideoCategory} from "./VideoCardComponents";
 const Home = ({Service}) => {
 
     const [videos, setVideos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(async () => {
+        setLoading(true);
         await Service.videos()
-            .then(res => setVideos(res))
-            .catch(error => console.log(error));
+            .then(res => {
+                setVideos(res);
+                setLoading(false);
+            })
+            .catch(error => setError(true));
     }, []);
+
+    if (loading) {
+        return (<Loading/>);
+    }
+
+    if (error) {
+        return (<Error/>);
+    }
 
     return (
         <>

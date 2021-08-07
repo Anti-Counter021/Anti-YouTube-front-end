@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 
 import {Container, Image, ListGroup, ListGroupItem, Row, Badge, Button, Alert} from "react-bootstrap";
 
+import Error from "./Error";
+import Loading from "./Loading";
 import {SITE} from "../Services";
 import VideoCard from "./VideoCard";
 import Navigation from "./Navigation";
@@ -13,25 +15,37 @@ const Channel = ({Service}) => {
 
     const [channel, setChannel] = useState({});
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const url = window.location.href.split('/');
     const channel_id = url[url.length - 1];
 
     const getChannel = async () => {
+        setLoading(true)
         await Service.channel(channel_id, GetAccessToken())
             .then(res => {
                 if (res.detail && res.detail.indexOf('not found') + 1) {
                     window.location.href = '/404';
                 } else {
                     setChannel(res);
+                    setLoading(false);
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => setError(true));
     }
 
     useEffect(async () => {
         await getChannel();
     }, [channel_id]);
+
+    if (loading) {
+        return (<Loading/>);
+    }
+
+    if (error) {
+        return (<Error/>);
+    }
 
     const follow = async (user_id) => {
         await Service.follow(user_id, GetAccessToken())
