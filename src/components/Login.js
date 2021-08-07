@@ -5,7 +5,7 @@ import {Form, FormGroup, Container, Row, FormLabel, FormControl, Button, Alert} 
 
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
-import {GetToken, setToken} from "../Tokens";
+import {GetRefreshToken, setTokens} from "../Tokens";
 
 
 const Login = ({Service}) => {
@@ -13,7 +13,7 @@ const Login = ({Service}) => {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        if (GetToken()) {
+        if (GetRefreshToken()) {
             setRedirect(true);
         }
     }, []);
@@ -47,7 +47,7 @@ const Login = ({Service}) => {
                         document.querySelector('[name="password"]').style.border = '1px solid #e50707';
                     }
                 } else {
-                    setToken(res.access_token);
+                    setTokens(res);
                     window.location.href = '/';
                 }
             })

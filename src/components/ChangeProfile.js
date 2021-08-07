@@ -15,7 +15,7 @@ import {
 } from "react-bootstrap";
 
 import {SITE} from "../Services";
-import {GetToken} from "../Tokens";
+import {GetAccessToken, GetRefreshToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
 
@@ -26,13 +26,13 @@ const ChangeProfile = ({Service}) => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        if (!GetToken()) {
+        if (!GetRefreshToken()) {
             setRedirect(true);
         }
     });
 
-    useEffect(() => {
-        Service.getProfileChangeData(GetToken())
+    useEffect(async () => {
+        await Service.getProfileChangeData(GetAccessToken())
             .then(res => {
                 setData(res);
             })
@@ -52,7 +52,7 @@ const ChangeProfile = ({Service}) => {
 
         data.send_message = !!data.send_message;
 
-        await Service.putProfileChangeData(GetToken(), data)
+        await Service.putProfileChangeData(GetAccessToken(), data)
             .then(res => {
                 setData(res);
             })
@@ -71,7 +71,7 @@ const ChangeProfile = ({Service}) => {
         const data = new FormData();
         data.append('avatar', document.querySelector('input[name="avatar"]').files[0])
 
-        await Service.uploadAvatar(data, GetToken())
+        await Service.uploadAvatar(data, GetAccessToken())
             .then(res => {
                 document.querySelector('input[name="avatar"]').style.border = '1px solid #ced4da';
 

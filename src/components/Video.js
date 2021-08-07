@@ -4,7 +4,7 @@ import Moment from "react-moment";
 import {Alert, Badge, Button, Container, Image, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 
 import {SITE} from "../Services";
-import {GetToken} from "../Tokens";
+import {GetAccessToken, GetRefreshToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
 
@@ -16,16 +16,16 @@ const Video = ({Service}) => {
     const url = window.location.href.split('/');
     const video_id = url[url.length - 1];
 
-    useEffect(() => {
-        Service.video(video_id)
+    useEffect(async () => {
+        await Service.video(video_id)
             .then(res => {
                 setVideo(res);
             })
             .catch(error => console.log(error));
     }, [video_id]);
 
-    const to_vote = (vote) => {
-        Service.vote({vote, video_id}, GetToken())
+    const to_vote = async (vote) => {
+        await Service.vote({vote, video_id}, GetAccessToken())
             .then(res => {
                 if (res.detail) {
                     setShow(true);

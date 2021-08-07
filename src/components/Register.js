@@ -3,16 +3,16 @@ import React, {useEffect, useState} from "react";
 import {Redirect} from "react-router-dom";
 import {Form, FormGroup, Container, Row, FormLabel, FormControl, FormCheck, Button, Alert} from "react-bootstrap";
 
-import {GetToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithService from "./WithService";
+import {GetRefreshToken} from "../Tokens";
 
 const Register = ({Service}) => {
 
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        if (GetToken()) {
+        if (GetRefreshToken()) {
             setRedirect(true);
         }
     }, []);

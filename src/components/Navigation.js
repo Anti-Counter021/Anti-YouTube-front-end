@@ -6,7 +6,7 @@ import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {Container, Nav, Navbar, NavbarBrand, NavDropdown, NavLink} from "react-bootstrap";
 
 import WithServices from "./WithService";
-import {deleteToken, GetToken} from "../Tokens";
+import {deleteTokens, GetRefreshToken} from "../Tokens";
 
 const Navigation = ({Service}) => {
 
@@ -14,20 +14,20 @@ const Navigation = ({Service}) => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        if (GetToken()) {
+        if (GetRefreshToken()) {
             setAuth(true);
         }
     });
 
-    useEffect(() => {
-        Service.categories()
+    useEffect(async () => {
+        await Service.categories()
             .then(res => setCategories(res))
             .catch(error => console.log(error));
     }, []);
 
     const logout = (event) => {
         event.preventDefault();
-        deleteToken();
+        deleteTokens();
         setAuth(false);
         window.location.href = '/';
     }

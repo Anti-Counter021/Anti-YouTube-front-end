@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import {Redirect} from "react-router-dom";
 import {Alert, Button, Container, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 
-import {GetToken} from "../Tokens";
+import {GetRefreshToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
 
@@ -17,7 +17,7 @@ const ResetPassword = ({Service}) => {
     const token = window.location.search.substring(1).split('=')[1];
 
     useEffect(() => {
-        if (GetToken()) {
+        if (GetRefreshToken()) {
             setRedirect(true);
         }
     });

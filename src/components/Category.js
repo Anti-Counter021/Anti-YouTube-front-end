@@ -14,8 +14,8 @@ const Category = ({Service}) => {
     const url = window.location.href.split('/');
     const category_id = url[url.length - 1];
 
-    useEffect(() => {
-        Service.category(category_id)
+    useEffect(async () => {
+        await Service.category(category_id)
             .then(res => {
                 setCategory(res);
             })
