@@ -5,6 +5,7 @@ import {Container, Row} from "react-bootstrap";
 import VideoCard from "./VideoCard";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
+import {VideoAuthor, VideoCategory} from "./VideoCardComponents";
 
 
 const Home = ({Service}) => {
@@ -25,7 +26,20 @@ const Home = ({Service}) => {
                 <Row>
                     {
                         videos.length ? (
-                            videos.map(video => (<VideoCard key={video.id} video={video}/>))
+                            videos.map(
+                                video => (
+                                    <VideoCard
+                                        key={video.id}
+                                        video={video}
+                                        components={
+                                            [
+                                                <VideoAuthor key={`${video.id}-user`} user={video.user}/>,
+                                                <VideoCategory key={`${video.id}-category`} category={video.category}/>,
+                                            ]
+                                        }
+                                    />
+                                )
+                            )
                         ) : null
                     }
                 </Row>

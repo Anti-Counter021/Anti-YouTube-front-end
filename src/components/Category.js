@@ -5,6 +5,7 @@ import {Container, Row} from "react-bootstrap";
 import VideoCard from "./VideoCard";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
+import {VideoAuthor} from "./VideoCardComponents";
 
 
 const Category = ({Service}) => {
@@ -34,11 +35,10 @@ const Category = ({Service}) => {
                         <Row>
                             {
                                 category.videos.map(
-                                    (
-                                        video
-                                    ) => (
+                                    video => (
                                         <VideoCard
                                             key={video.id}
+                                            components={[<VideoAuthor key={`${video.id}-user`} user={video.user}/>]}
                                             video={video}
                                         />
                                     )

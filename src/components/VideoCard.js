@@ -14,10 +14,10 @@ const VideoCard = (
             preview_file,
             views,
             created_at,
-            user: {username, avatar},
             votes: {likes, dislikes},
-        }
-    }
+        },
+        components,
+    },
 ) => {
 
     return (
@@ -45,14 +45,11 @@ const VideoCard = (
                         Created at: <Moment date={created_at} format="DD.MM.YYYY"/>
                     </ListGroupItem>
 
-                    <ListGroupItem>
-                        Author: <span className="author">{username}</span>
-                        <Image
-                            className="avatar"
-                            rounded
-                            src={`${SITE}${avatar}`}
-                        />
-                    </ListGroupItem>
+                    {
+                        components ? (
+                            components.map(component => (component))
+                        ) : null
+                    }
 
                     <ListGroupItem>
                         Votes:

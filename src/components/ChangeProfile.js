@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import {Redirect} from "react-router-dom";
 import {
-    Alert,
+    Alert, Badge,
     Button,
     Container,
     Form,
@@ -90,6 +90,12 @@ const ChangeProfile = ({Service}) => {
         document.querySelector('input[name="avatar"]').value = null;
     }
 
+    const leftChars = (event) => {
+        const value = event.target.value;
+        const counterLeft = document.querySelector('#left-chars');
+        counterLeft.textContent = event.target.maxLength - value.length;
+    }
+
     return (
         <>
             <Navigation/>
@@ -101,7 +107,26 @@ const ChangeProfile = ({Service}) => {
 
                         <FormGroup>
                             <FormLabel>About<span className="required">*</span></FormLabel>
-                            <FormControl defaultValue={data.about} required name="about" type="text" placeholder="About"/>
+                            <FormControl
+                                as="textarea"
+                                maxLength="255"
+                                defaultValue={data.about}
+                                required
+                                name="about"
+                                type="text"
+                                placeholder="About"
+                                onChange={leftChars}
+                            />&nbsp;
+                            {
+                                data.about ? (
+                                    <>
+                                        Chars left&nbsp;
+                                        <Badge pill bg="success" id="left-chars">
+                                            {255 - data.about.length}
+                                        </Badge>
+                                    </>
+                                ) : null
+                            }
                         </FormGroup>
 
                         <FormGroup className="text-start mt-3">

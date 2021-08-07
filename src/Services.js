@@ -124,4 +124,22 @@ export default class Services {
         return await this.httpRequest({method: 'POST', url: 'videos/vote', data, token});
     }
 
+    channel = async (channel_id, token) => {
+        return await this.httpRequest(
+            {method: 'GET', url: `auth/channel?pk=${channel_id}`, token}
+        );
+    }
+
+    follow = async (user_id, token) => {
+        return await this.httpRequest(
+            {method: 'POST', url: `auth/follow?to_user_id=${user_id}`, token}
+        );
+    }
+
+    unfollow = async (user_id, token) => {
+        return await this.httpRequest(
+            {method: 'POST', url: `auth/unfollow?to_user_id=${user_id}`, token}
+        );
+    }
+
 }

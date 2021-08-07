@@ -3,6 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import Home from "./components/Home";
 import Video from "./components/Video";
 import Login from "./components/Login";
+import Channel from "./components/Channel";
 import Activate from "./components/Activate";
 import Category from "./components/Category";
 import Register from "./components/Register";
@@ -15,6 +16,7 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
+                <Route path='/channel/:channel_id' component={Channel}/>
                 <Route path='/categories/:category_id' component={Category}/>
                 <Route path='/videos/:video_id' component={Video}/>
                 <Route path='/verify' component={Activate}/>
