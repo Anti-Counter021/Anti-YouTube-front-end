@@ -146,4 +146,12 @@ export default class Services {
         return await this.httpRequest({method: 'GET', url: 'auth/followed', token});
     }
 
+    comments = async (video_id) => {
+        return await this.httpRequest({method: 'GET', url: `comments/video/${video_id}`})
+    }
+
+    createComment = async (data, token) => {
+        return await this.httpRequest({method: 'POST', url: 'comments/', data, token});
+    }
+
 }

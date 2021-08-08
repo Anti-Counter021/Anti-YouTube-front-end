@@ -54,6 +54,25 @@ a {
     }
 }
 
+.hide {
+    display: none;
+}
+
+.reply {
+    background: #dc2535;
+    color: #fff;
+    border-radius: 10px;
+    padding: 7px;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.comment-form {
+    margin-top: 7px;
+}
+
 .required {
     color: #e50707;
 }
@@ -62,6 +81,8 @@ a {
     margin-top: 15px;
     max-width: 400px;
     max-height: 400px;
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.78);
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.78);
 }
 
 .error {

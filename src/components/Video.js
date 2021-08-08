@@ -7,6 +7,7 @@ import {Alert, Badge, Button, Container, Image, ListGroup, ListGroupItem, Row} f
 import Error from "./Error";
 import Loading from "./Loading";
 import {SITE} from "../Services";
+import Comments from "./Comments";
 import {GetAccessToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
@@ -187,6 +188,7 @@ const Video = ({Service}) => {
                         </Row>
                     ) : null
                 }
+                <Comments/>
             </Container>
         </>
     );
