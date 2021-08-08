@@ -61,6 +61,7 @@ const Register = ({Service}) => {
                         }
                     }
                 } else {
+                    alert(res.msg);
                     window.location.href = '/login';
                 }
             })

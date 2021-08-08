@@ -2,11 +2,11 @@ import React, {useEffect, useState} from "react";
 
 import Moment from "react-moment";
 import {Link} from "react-router-dom";
-import {Image} from "react-bootstrap";
+import {Badge, Form, FormControl, Image} from "react-bootstrap";
 
 import {SITE} from "../Services";
 import WithServices from "./WithService";
-import {GetAccessToken} from "../Tokens";
+import {GetAccessToken, GetRefreshToken} from "../Tokens";
 
 const Comments = ({Service}) => {
 
@@ -35,6 +35,12 @@ const Comments = ({Service}) => {
     const submitReply = async (event) => {
         event.preventDefault();
 
+        if (!GetRefreshToken()) {
+            alert("You don't authorized");
+            window.location.href = '/login';
+            return
+        }
+
         const id = event.target.getAttribute('data-id');
         const text = document.querySelector(`#form-${id}`).querySelector('textarea[name="comment-text"]').value;
 
@@ -49,11 +55,18 @@ const Comments = ({Service}) => {
                 const form = document.querySelector(`#form-${id}`);
                 form.querySelector('textarea[name="comment-text"]').value = '';
                 form.classList.toggle('hide');
+                form.querySelector('.left-chars').textContent = '200';
                 await getComments();
             })
             .catch(error => console.log(error));
 
     };
+
+    const leftChars = (event) => {
+        const value = event.target.value;
+        const counterLeft = event.target.parentElement.querySelector('.left-chars');
+        counterLeft.textContent = event.target.maxLength - value.length;
+    }
 
     const commentsTree = (commentsList) => {
         const res = (
@@ -67,7 +80,21 @@ const Comments = ({Service}) => {
                                         <hr/>
                                         <div className="col-md-12 mb-2 mt-2 p-0">
                                             <Link to={`/channel/${comment.user.id}`}>
-                                                <Image rounded className="avatar" src={`${SITE}${comment.user.avatar}`}/>
+                                                {
+                                                    comment.user.avatar ? (
+                                                        <Image
+                                                            rounded
+                                                            className="avatar"
+                                                            src={`${SITE}${comment.user.avatar}`}
+                                                        />
+                                                    ) : (
+                                                        <Image
+                                                            className="avatar"
+                                                            rounded
+                                                            src="https://via.placeholder.com/80x80"
+                                                        />
+                                                    )
+                                                }
                                                 &nbsp;{comment.user.username}
                                             </Link> | Published: <Moment date={comment.created_at} format="DD.MM.YYYY"/>
                                             <hr/>
@@ -84,7 +111,13 @@ const Comments = ({Service}) => {
                                                 className="comment-form form-group hide"
                                                 id={`form-${comment.id}`}
                                             >
-                                                <textarea maxLength="200" className="form-control" name="comment-text"/>
+                                                <textarea
+                                                    maxLength="200"
+                                                    className="form-control"
+                                                    name="comment-text"
+                                                    onChange={leftChars}
+                                                />
+                                                <Badge className="mt-1 mb-1 left-chars" pill bg="success">200</Badge>
                                                 <br/>
                                                 <input
                                                     type="submit"
@@ -114,6 +147,20 @@ const Comments = ({Service}) => {
 
     return (
         <>
+            <Link
+                className="reply"
+                data-id="0"
+                data-parent="0"
+                onClick={addForm}
+            >
+                Add comment
+            </Link>
+            <Form className="comment-form form-group hide" id="form-0">
+                <FormControl as="textarea" maxLength="200" name="comment-text" onChange={leftChars}/>
+                <Badge className="mt-1 mb-1 left-chars" pill bg="success">200</Badge>
+                <br/>
+                <input type="submit" className="btn btn-primary" value="Submit" onClick={submitReply} data-id="0"/>
+            </Form>
             {
                 comments.length ? (
                     commentsTree(comments)
