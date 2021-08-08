@@ -40,11 +40,21 @@ const Channel = ({Service}) => {
     }, [channel_id]);
 
     if (loading) {
-        return (<Loading/>);
+       return (
+            <>
+                <Navigation/>
+                <Loading/>
+            </>
+        )
     }
 
     if (error) {
-        return (<Error/>);
+        return (
+            <>
+                <Navigation/>
+                <Error/>
+            </>
+        )
     }
 
     const follow = async (user_id) => {

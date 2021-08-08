@@ -37,11 +37,21 @@ const Video = ({Service}) => {
     }, [video_id]);
 
     if (loading) {
-        return (<Loading/>);
+       return (
+            <>
+                <Navigation/>
+                <Loading/>
+            </>
+        )
     }
 
     if (error) {
-        return (<Error/>);
+        return (
+            <>
+                <Navigation/>
+                <Error/>
+            </>
+        )
     }
 
     const to_vote = async (vote) => {

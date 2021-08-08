@@ -34,11 +34,21 @@ const Category = ({Service}) => {
     }, [category_id]);
 
     if (loading) {
-        return (<Loading/>);
+       return (
+            <>
+                <Navigation/>
+                <Loading/>
+            </>
+        )
     }
 
     if (error) {
-        return (<Error/>);
+        return (
+            <>
+                <Navigation/>
+                <Error/>
+            </>
+        )
     }
 
     return (

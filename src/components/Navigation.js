@@ -91,9 +91,18 @@ const Navigation = ({Service}) => {
 
                     </Nav>
                 </NavbarCollapse>
-                <NavbarCollapse className="justify-content-end">
-                    <NavLink><Link className="link" to="/profile"><i className="fas fa-user-circle"/></Link></NavLink>
-                </NavbarCollapse>
+                {
+                    auth ? (
+                        <NavbarCollapse className="justify-content-end">
+                            <NavLink>
+                                <Link className="link" to="/videos/add"><i className="fas fa-file-video"/></Link>
+                            </NavLink>
+                            <NavLink>
+                                <Link className="link" to="/profile"><i className="fas fa-user-circle"/></Link>
+                            </NavLink>
+                        </NavbarCollapse>
+                    ) : null
+                }
             </Container>
         </Navbar>
     );

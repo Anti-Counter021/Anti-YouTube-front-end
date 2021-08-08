@@ -4,6 +4,8 @@ import Moment from "react-moment";
 import {Link} from "react-router-dom";
 import {Badge, Form, FormControl, Image} from "react-bootstrap";
 
+import Error from "./Error";
+import Loading from "./Loading";
 import {SITE} from "../Services";
 import WithServices from "./WithService";
 import {GetAccessToken, GetRefreshToken} from "../Tokens";
@@ -14,16 +16,30 @@ const Comments = ({Service}) => {
     const video_id = url[url.length - 1];
 
     const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const getComments = async () => {
+        setLoading(true);
         await Service.comments(video_id)
-            .then(res => setComments(res))
-            .catch(error => console.log(error));
+            .then(res => {
+                setComments(res);
+                setLoading(false);
+            })
+            .catch(error => setError(true));
     };
 
     useEffect(async () => {
         await getComments();
     }, [video_id]);
+
+    if (loading) {
+       return (<Loading/>);
+    }
+
+    if (error) {
+        return (<Error/>);
+    }
 
     const addForm = (event) => {
         const parent = event.target.getAttribute('data-id')

@@ -28,11 +28,21 @@ const Subscriptions = ({Service}) => {
     }, []);
 
     if (loading) {
-        return (<Loading/>);
+       return (
+            <>
+                <Navigation/>
+                <Loading/>
+            </>
+        )
     }
 
     if (error) {
-        return (<Error/>);
+        return (
+            <>
+                <Navigation/>
+                <Error/>
+            </>
+        )
     }
 
     return (
