@@ -48,7 +48,7 @@ export default class Services {
                             if (res.access_token) {
                                 await setTokens({...res, 'refresh_token': refresh_token});
                                 return await this.httpRequest(
-                                    {method, url, token: res.access_token, data}
+                                    {method, url, token: res.access_token, data, formData}
                                 );
                             } else if (res.detail) {
                                 window.location.href = '/login';
@@ -152,6 +152,12 @@ export default class Services {
 
     createComment = async (data, token) => {
         return await this.httpRequest({method: 'POST', url: 'comments/', data, token});
+    }
+
+    addVideo = async (data, token) => {
+        return await this.httpRequest(
+            {method: 'POST', url: 'videos/', token, data, formData: true}
+        );
     }
 
 }
