@@ -112,8 +112,8 @@ export default class Services {
         return await this.httpRequest({method: 'GET', url: `categories/${category_id}`});
     }
 
-    videos = async () => {
-        return await this.httpRequest({method: 'GET', url: 'videos/'})
+    videos = async (page = 1) => {
+        return await this.httpRequest({method: 'GET', url: `videos/?page=${page}`});
     }
 
     video = async (video_id) => {

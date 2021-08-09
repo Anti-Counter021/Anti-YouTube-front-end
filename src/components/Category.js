@@ -57,10 +57,8 @@ const Category = ({Service}) => {
             {
                 category_id && category.id ? (
                     <Container>
-                        <Row className="text-center">
-                            <h1>{category.name}</h1>
-                        </Row>
                         <Row>
+                            <h1 className="text-center mt-3">{category.name}</h1>
                             {
                                 category.videos.map(
                                     video => (
