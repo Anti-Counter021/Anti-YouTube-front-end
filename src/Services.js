@@ -8,15 +8,17 @@ export default class Services {
 
     _url = SITE
 
-    async httpRequest({method, url, token, data, formData}) {
+    async httpRequest({method, url, token, data, formData, headers}) {
         const token_auth = token ? {'Authorization': `Bearer ${token}`} : {};
         const body_data = data ? {body: JSON.stringify(data)} : {};
+        const headers_data = headers ? headers : {}
 
         const jsonSettings = {
             method: method,
             headers: {
                 'Content-type': 'application/json',
                 ...token_auth,
+                ...headers,
             },
             ...body_data,
         };
@@ -25,6 +27,7 @@ export default class Services {
             method: method,
             headers: {
                 ...token_auth,
+                ...headers,
             },
             body: data,
         };
@@ -158,6 +161,17 @@ export default class Services {
         return await this.httpRequest(
             {method: 'POST', url: 'videos/', token, data, formData: true}
         );
+    }
+
+    historyAdd = async (token, pk) => {
+        return await this.httpRequest(
+            {method: 'GET', url: `videos/video/${pk}`, token,
+                headers: {'range': 'bytes=0-'}},
+        );
+    }
+
+    history = async (token) => {
+        return this.httpRequest({method: 'GET', token, url: 'auth/history'});
     }
 
 }

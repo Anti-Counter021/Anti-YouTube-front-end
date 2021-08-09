@@ -8,7 +8,7 @@ import Error from "./Error";
 import Loading from "./Loading";
 import {SITE} from "../Services";
 import Comments from "./Comments";
-import {GetAccessToken} from "../Tokens";
+import {GetAccessToken, GetRefreshToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
 
@@ -34,6 +34,12 @@ const Video = ({Service}) => {
                 }
             })
             .catch(error => setError(true));
+
+        if (GetRefreshToken()) {
+            await Service.historyAdd(GetAccessToken(), video_id)
+                .catch(error => console.log(error));
+        }
+
     }, [video_id]);
 
     if (loading) {

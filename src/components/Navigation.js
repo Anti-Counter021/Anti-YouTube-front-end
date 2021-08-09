@@ -61,6 +61,9 @@ const Navigation = ({Service}) => {
                                     ) : (
                                         <>
                                             <NavDropdown.Item>
+                                                <Link to="/history">History</Link>
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item>
                                                 <span onClick={logout}>Logout</span>
                                             </NavDropdown.Item>
                                         </>
