@@ -174,4 +174,10 @@ export default class Services {
         return this.httpRequest({method: 'GET', token, url: 'auth/history'});
     }
 
+    getUsername = async (email) => {
+        return this.httpRequest(
+            {method: 'POST', url: `auth/username?email=${email}`},
+        );
+    }
+
 }

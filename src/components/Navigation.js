@@ -57,6 +57,9 @@ const Navigation = ({Service}) => {
                                             <NavDropdown.Item>
                                                 <Link to="/request-password-reset">Reset password</Link>
                                             </NavDropdown.Item>
+                                            <NavDropdown.Item>
+                                                <Link to="/username">Get username</Link>
+                                            </NavDropdown.Item>
                                         </>
                                     ) : (
                                         <>

@@ -9,6 +9,7 @@ import Activate from "./components/Activate";
 import Category from "./components/Category";
 import Register from "./components/Register";
 import AddVideos from "./components/AddVideos";
+import GetUsername from "./components/GetUsername";
 import ChangeProfile from "./components/ChangeProfile";
 import Subscriptions from "./components/Subscriptions";
 import ResetPassword from "./components/ResetPassword";
@@ -19,6 +20,7 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
+                <Route exact path='/username' component={GetUsername}/>
                 <Route exact path='/history' component={History}/>
                 <Route exact path='/videos/add' component={AddVideos}/>
                 <Route path='/channel/:channel_id' component={Channel}/>
