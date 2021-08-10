@@ -14,6 +14,7 @@ import {VideoCategory} from "./VideoCardComponents";
 const Channel = ({Service}) => {
 
     const [channel, setChannel] = useState({});
+    const [videos, setVideos] = useState([]);
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -29,6 +30,17 @@ const Channel = ({Service}) => {
                     window.location.href = '/404';
                 } else {
                     setChannel(res);
+                    setLoading(false);
+                }
+            })
+            .catch(error => setError(true));
+
+        await Service.channelVideos(channel_id)
+            .then(res => {
+                if (res.detail && res.detail.indexOf('not found') + 1) {
+                    window.location.href = '/404';
+                } else {
+                    setVideos(res);
                     setLoading(false);
                 }
             })
@@ -75,6 +87,30 @@ const Channel = ({Service}) => {
                 document.querySelector('#success').textContent = res.msg;
             })
             .catch(error => console.log(error));
+    }
+
+    let followBtn;
+    switch (channel.is_following) {
+        case (null):
+            followBtn = (<h3>You not authorized</h3>);
+            break;
+        case (3):
+            followBtn = (<h3>You cannot be subscribed to yourself</h3>);
+            break;
+        case (0):
+            followBtn = (
+                <Button variant="success" onClick={() => follow(channel.id)}>
+                    Follow
+                </Button>
+            );
+            break;
+        case (1):
+            followBtn = (
+                <Button variant="danger" onClick={() => unfollow(channel.id)}>
+                    Unfollow
+                </Button>
+            );
+            break;
     }
 
     return (
@@ -145,33 +181,7 @@ const Channel = ({Service}) => {
                                 </ListGroup>
 
                                 <div className="text-center mt-2">
-                                    {
-                                        channel.is_following === null ? (
-                                            <h3>You not authorized</h3>
-                                        ) : null
-                                    }
-
-                                    {
-                                        channel.is_following === 3 ? (
-                                            <h3>You cannot be subscribed to yourself</h3>
-                                        ) : null
-                                    }
-
-                                    {
-                                        channel.is_following === 0 ? (
-                                            <Button variant="success" onClick={() => follow(channel.id)}>
-                                                Follow
-                                            </Button>
-                                        ) : null
-                                    }
-
-                                    {
-                                        channel.is_following === 1 ? (
-                                            <Button variant="danger" onClick={() => unfollow(channel.id)}>
-                                                Unfollow
-                                            </Button>
-                                        ) : null
-                                    }
+                                    {followBtn}
                                 </div>
 
                             </div>
@@ -180,8 +190,8 @@ const Channel = ({Service}) => {
                         <Row className="mt-3">
                             <h1 className="text-center">Videos</h1>
                             {
-                                channel.videos && channel.videos.length ? (
-                                    channel.videos.map(
+                                videos && videos.length ? (
+                                    videos.map(
                                         video => (
                                             <VideoCard
                                                 key={video.id}

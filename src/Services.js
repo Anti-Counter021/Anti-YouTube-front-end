@@ -113,7 +113,7 @@ export default class Services {
 
     categoryVideos = async (category_id) => {
         return await this.httpRequest(
-            {method: 'GET', url: `videos/category/${category_id}`}
+            {method: 'GET', url: `categories/videos/${category_id}`}
         );
     }
 
@@ -132,6 +132,12 @@ export default class Services {
     channel = async (channel_id, token) => {
         return await this.httpRequest(
             {method: 'GET', url: `auth/channel?pk=${channel_id}`, token}
+        );
+    }
+
+    channelVideos = async (channel_id) => {
+        return await this.httpRequest(
+            {method: 'GET', url: `auth/channel/videos/${channel_id}`}
         );
     }
 

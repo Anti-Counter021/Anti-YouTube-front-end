@@ -53,8 +53,8 @@ const VideoCard = (
 
                     <ListGroupItem>
                         Votes:
-                        <i class="fas fa-thumbs-up"/> <Badge pill bg="success">{likes}</Badge>
-                        <i class="fas fa-thumbs-down"/> <Badge pill bg="danger">{dislikes}</Badge>
+                        <i className="fas fa-thumbs-up"/> <Badge pill bg="success">{likes}</Badge>
+                        <i className="fas fa-thumbs-down"/> <Badge pill bg="danger">{dislikes}</Badge>
                     </ListGroupItem>
 
                 </ListGroup>

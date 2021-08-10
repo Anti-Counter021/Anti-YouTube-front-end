@@ -180,10 +180,10 @@ const Video = ({Service}) => {
                                     <ListGroupItem>
                                         Votes:
                                         <span id="like" onClick={like}>
-                                            <i class="fas fa-thumbs-up"/> <Badge pill bg="success">{video.votes.likes}</Badge>
+                                            <i className="fas fa-thumbs-up"/> <Badge pill bg="success">{video.votes.likes}</Badge>
                                         </span>
                                         <span id="dislike" onClick={dislike}>
-                                            <i class="fas fa-thumbs-down"/> <Badge pill bg="danger">{video.votes.dislikes}</Badge>
+                                            <i className="fas fa-thumbs-down"/> <Badge pill bg="danger">{video.votes.dislikes}</Badge>
                                         </span>
                                     </ListGroupItem>
                                     <ListGroupItem>
