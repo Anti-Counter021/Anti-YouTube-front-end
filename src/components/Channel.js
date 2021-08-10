@@ -96,7 +96,7 @@ const Channel = ({Service}) => {
                                     </Alert>
                                 ) : null
                             }
-                            <h1 className="text-center">{channel.username}</h1>
+                            <h1 className="mt-3 text-center">{channel.username}</h1>
                         </Row>
                         <Row>
                             <div className="col-md-5 image-block">

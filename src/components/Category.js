@@ -12,7 +12,7 @@ import {VideoAuthor} from "./VideoCardComponents";
 
 const Category = ({Service}) => {
 
-    const [category, setCategory] = useState({});
+    const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -21,12 +21,12 @@ const Category = ({Service}) => {
 
     useEffect(async () => {
         setLoading(true);
-        await Service.category(category_id)
+        await Service.categoryVideos(category_id)
             .then(res => {
                 if (res.detail && res.detail.indexOf('not found') + 1) {
                     window.location.href = '/404';
                 } else {
-                    setCategory(res);
+                    setVideos(res);
                     setLoading(false);
                 }
             })
@@ -55,12 +55,12 @@ const Category = ({Service}) => {
         <>
             <Navigation/>
             {
-                category_id && category.id ? (
+                category_id && videos.length ? (
                     <Container>
                         <Row>
-                            <h1 className="text-center mt-3">{category.name}</h1>
+                            <h1 className="text-center mt-3">{videos[0].category.name}</h1>
                             {
-                                category.videos.map(
+                                videos.map(
                                     video => (
                                         <VideoCard
                                             key={video.id}
