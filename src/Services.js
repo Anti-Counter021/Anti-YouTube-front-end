@@ -8,17 +8,15 @@ export default class Services {
 
     _url = SITE
 
-    async httpRequest({method, url, token, data, formData, headers}) {
+    async httpRequest({method, url, token, data, formData}) {
         const token_auth = token ? {'Authorization': `Bearer ${token}`} : {};
         const body_data = data ? {body: JSON.stringify(data)} : {};
-        const headers_data = headers ? headers : {}
 
         const jsonSettings = {
             method: method,
             headers: {
                 'Content-type': 'application/json',
                 ...token_auth,
-                ...headers,
             },
             ...body_data,
         };
@@ -27,7 +25,6 @@ export default class Services {
             method: method,
             headers: {
                 ...token_auth,
-                ...headers,
             },
             body: data,
         };
@@ -143,13 +140,13 @@ export default class Services {
 
     follow = async (user_id, token) => {
         return await this.httpRequest(
-            {method: 'POST', url: `auth/follow?to_user_id=${user_id}`, token}
+            {method: 'POST', url: `auth/follow?to_id=${user_id}`, token}
         );
     }
 
     unfollow = async (user_id, token) => {
         return await this.httpRequest(
-            {method: 'POST', url: `auth/unfollow?to_user_id=${user_id}`, token}
+            {method: 'POST', url: `auth/unfollow?to_id=${user_id}`, token}
         );
     }
 
@@ -173,8 +170,7 @@ export default class Services {
 
     historyAdd = async (token, pk) => {
         return await this.httpRequest(
-            {method: 'GET', url: `videos/video/${pk}`, token,
-                headers: {'range': 'bytes=0-'}},
+            {method: 'POST', url: `videos/add-to-history?pk=${pk}`, token},
         );
     }
 
