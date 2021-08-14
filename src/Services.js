@@ -71,7 +71,7 @@ export default class Services {
     }
 
     login = async (data) => {
-        return await this.httpRequest({method: 'POST', url: 'auth/login', data});
+        return await this.httpRequest({method: 'POST', url: 'auth/login', data, formData: true});
     }
 
     activate = async (token) => {

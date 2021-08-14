@@ -28,7 +28,7 @@ const Login = ({Service}) => {
         event.preventDefault();
         document.querySelector('#btn-login').style.opacity = '0';
 
-        const data = Object.fromEntries(new FormData(event.target).entries());
+        const data = new FormData(event.target);
 
         await Service.login(data)
             .then(res => {
