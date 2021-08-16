@@ -63,7 +63,7 @@ const Comments = ({Service}) => {
         const data = {
             text,
             video_id: video_id,
-            parent: id,
+            parent_id: id,
         };
 
         await Service.createComment(data, GetAccessToken())
@@ -118,7 +118,7 @@ const Comments = ({Service}) => {
                                             <Link
                                                 className="reply"
                                                 data-id={comment.id}
-                                                data-parent={comment.parent}
+                                                data-parent={comment.parent_id}
                                                 onClick={addForm}
                                             >
                                                 Reply
@@ -140,7 +140,7 @@ const Comments = ({Service}) => {
                                                     onClick={submitReply}
                                                     className="btn btn-primary submit-reply"
                                                     data-id={comment.id}
-                                                    data-submit-reply={comment.parent}
+                                                    data-submit-reply={comment.parent_id}
                                                     value="Submit"
                                                 />
                                             </form>
