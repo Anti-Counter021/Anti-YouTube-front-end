@@ -86,6 +86,12 @@ export default class Services {
         return await this.httpRequest({method: 'PUT', url: 'auth/change-data', token, data});
     }
 
+    changePassword = async (token, data) => {
+        return await this.httpRequest(
+            {method: 'PUT', url: 'auth/change-password', token, data}
+        );
+    }
+
     uploadAvatar = async (data, token) => {
         return await this.httpRequest(
             {method: 'POST', url: 'auth/avatar', token, data, formData: true}

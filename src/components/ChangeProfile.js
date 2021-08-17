@@ -17,9 +17,10 @@ import {
 import Error from "./Error";
 import Loading from "./Loading";
 import {SITE} from "../Services";
-import {GetAccessToken, GetRefreshToken} from "../Tokens";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
+import ChangePassword from "./ChangePassword";
+import {GetAccessToken, GetRefreshToken} from "../Tokens";
 
 const ChangeProfile = ({Service}) => {
 
@@ -208,6 +209,11 @@ const ChangeProfile = ({Service}) => {
 
                     </Form>
 
+                </Row>
+
+                <Row className="mt-4">
+                    <div className="col-md-2"/>
+                    <ChangePassword/>
                 </Row>
             </Container>
         </>
