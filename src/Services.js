@@ -181,17 +181,23 @@ export default class Services {
     }
 
     history = async (token) => {
-        return this.httpRequest({method: 'GET', token, url: 'auth/history'});
+        return await this.httpRequest({method: 'GET', token, url: 'auth/history'});
     }
 
     clearHistory = async (token) => {
-        return this.httpRequest({method: 'DELETE', url: 'videos/history/clear', token});
+        return await this.httpRequest({method: 'DELETE', url: 'videos/history/clear', token});
     }
 
     getUsername = async (email) => {
-        return this.httpRequest(
+        return await this.httpRequest(
             {method: 'POST', url: `auth/username?email=${email}`},
         );
+    }
+
+    search = async (q) => {
+        return await this.httpRequest(
+            {method: 'GET', url: `videos/search?q=${q}`},
+        )
     }
 
 }

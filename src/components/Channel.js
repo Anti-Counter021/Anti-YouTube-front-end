@@ -118,7 +118,7 @@ const Channel = ({Service}) => {
             <Navigation/>
             {
                 channel ? (
-                    <Container>
+                    <Container className="mt-5">
                         <Row>
                             {
                                 show ? (

@@ -3,6 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import Home from "./components/Home";
 import Video from "./components/Video";
 import Login from "./components/Login";
+import Search from "./components/Search";
 import History from "./components/History";
 import Channel from "./components/Channel";
 import Activate from "./components/Activate";
@@ -20,6 +21,7 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
+                <Route exact path='/search' component={Search}/>
                 <Route exact path='/username' component={GetUsername}/>
                 <Route exact path='/history' component={History}/>
                 <Route exact path='/videos/add' component={AddVideos}/>

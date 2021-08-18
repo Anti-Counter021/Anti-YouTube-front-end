@@ -93,6 +93,8 @@ const Navigation = ({Service}) => {
                                 ) : null
                             }
 
+                            <NavLink><Link className="link" to="/search"><i className="fas fa-search"/></Link></NavLink>
+
                         </Nav>
                     </NavbarCollapse>
                     {
