@@ -184,6 +184,10 @@ export default class Services {
         return this.httpRequest({method: 'GET', token, url: 'auth/history'});
     }
 
+    clearHistory = async (token) => {
+        return this.httpRequest({method: 'DELETE', url: 'videos/history/clear', token});
+    }
+
     getUsername = async (email) => {
         return this.httpRequest(
             {method: 'POST', url: `auth/username?email=${email}`},
