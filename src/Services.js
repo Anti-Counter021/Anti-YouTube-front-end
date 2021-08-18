@@ -60,6 +60,10 @@ export default class Services {
             }
 
             if (res.status !== 400 && res.status !== 422 && res.status !== 401) {
+                const json = await res.json();
+                if (res.status === 403 && json.detail.toLowerCase().indexOf('not activated') + 1) {
+                    alert('You need activated. Please check your email!');
+                }
                 throw new Error(`Error ${url}, Status = ${res.status}`);
             }
         }
