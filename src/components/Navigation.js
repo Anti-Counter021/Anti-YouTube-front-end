@@ -6,7 +6,7 @@ import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {Container, Nav, Navbar, NavbarBrand, NavDropdown, NavLink} from "react-bootstrap";
 
 import WithServices from "./WithService";
-import {deleteTokens, GetRefreshToken} from "../Tokens";
+import {deleteTokens, GetRefreshToken, GetUserId} from "../Tokens";
 
 const Navigation = ({Service}) => {
 
@@ -105,6 +105,9 @@ const Navigation = ({Service}) => {
                                 </NavLink>
                                 <NavLink>
                                     <Link className="link" to="/profile/change"><i className="fas fa-user-circle"/></Link>
+                                </NavLink>
+                                <NavLink>
+                                    <Link className="link" to={`/channel/${GetUserId()}`}><i className="fas fa-id-card"/></Link>
                                 </NavLink>
                             </NavbarCollapse>
                         ) : null
