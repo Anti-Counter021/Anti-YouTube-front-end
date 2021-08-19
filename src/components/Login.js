@@ -38,6 +38,7 @@ const Login = ({Service}) => {
             .then(res => {
                 if (res.detail) {
                     setShow(true);
+                    document.querySelector('input').value = '';
                     document.querySelector('#error').textContent = res.detail;
                 } else {
                     setTokens(res);

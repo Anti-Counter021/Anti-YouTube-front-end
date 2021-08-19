@@ -12,6 +12,7 @@ import {
     FormLabel,
     Image,
     Row,
+    Modal
 } from "react-bootstrap";
 
 import Error from "./Error";
@@ -29,6 +30,8 @@ const ChangeProfile = ({Service}) => {
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [QR_SRC, setQR_SRC] = useState('https://via.placeholder.com/150x150');
 
     useEffect(() => {
         if (!GetRefreshToken()) {
@@ -86,6 +89,27 @@ const ChangeProfile = ({Service}) => {
         document.querySelector('#btn-change').style.opacity = '1';
     }
 
+    const setStepAuth = async (event) => {
+        event.preventDefault();
+        document.querySelector('#btn-step').style.opacity = '0';
+
+        await Service.toggleStepAuth(GetAccessToken())
+            .then(res => {
+                console.log(res)
+                if (res.msg) {
+                    if (res.msg.toLowerCase().indexOf('off') + 1) {
+                        document.querySelector('[name="two_auth"]').checked = false;
+                        document.querySelector('#btn-step').textContent = 'On';
+                        document.querySelector('#btn-step').style.opacity = '1';
+                    } else {
+                        setQR_SRC(res.msg);
+                        setModal(true);
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+    }
+
     const uploadAvatar = async (event) => {
         event.preventDefault();
 
@@ -117,6 +141,33 @@ const ChangeProfile = ({Service}) => {
         const value = event.target.value;
         const counterLeft = document.querySelector('#left-chars');
         counterLeft.textContent = event.target.maxLength - value.length;
+    }
+
+    if (modal) {
+        return (
+            <>
+                <Navigation/>
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <Modal.Title>QR code for google authenticator</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body className="text-center">
+                        <Image src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${QR_SRC}`}/>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button onClick={() => {
+                            setModal(false);
+                            setTimeout(() => {
+                                document.querySelector('[name="two_auth"]').checked = true;
+                                document.querySelector('#btn-step').textContent = 'Off';
+                            }, 1000)
+                        }} variant="secondary">Close</Button>
+                    </Modal.Footer>
+                </Modal.Dialog>
+            </>
+        );
     }
 
     return (
@@ -214,6 +265,22 @@ const ChangeProfile = ({Service}) => {
                 <Row className="mt-4">
                     <div className="col-md-2"/>
                     <ChangePassword/>
+                </Row>
+
+                <Row>
+                    <div className="col-md-3"/>
+                    <Form className="col-md-6 text-center" onSubmit={setStepAuth}>
+                        <h2 className="text-center">2-step auth</h2>
+                        <FormGroup className="text-start">
+                            <FormCheck disabled="disabled" name="two_auth" defaultChecked={data.two_auth} type="checkbox" label="2-auth step?"/>
+                        </FormGroup>
+
+                        <Button id="btn-step" className="mb-3 mt-3 text-center" variant="success" type="submit">
+                            {
+                                data.two_auth ? (<>Off</>) : (<>On</>)
+                            }
+                        </Button>
+                    </Form>
                 </Row>
             </Container>
         </>

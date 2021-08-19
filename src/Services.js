@@ -214,4 +214,8 @@ export default class Services {
         );
     }
 
+    toggleStepAuth = async (token) => {
+        return await this.httpRequest({method: 'GET', url: 'auth/2-auth-toggle', token});
+    }
+
 }
