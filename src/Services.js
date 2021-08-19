@@ -64,6 +64,9 @@ export default class Services {
                 if (res.status === 403 && json.detail.toLowerCase().indexOf('not activated') + 1) {
                     alert('You need activated. Please check your email!');
                 }
+                if (res.status === 403) {
+                    return json;
+                }
                 throw new Error(`Error ${url}, Status = ${res.status}`);
             }
         }
@@ -203,6 +206,12 @@ export default class Services {
         return await this.httpRequest(
             {method: 'GET', url: `videos/search?q=${q}`},
         )
+    }
+
+    twoStepAuth = async (data) => {
+        return await this.httpRequest(
+            {method: 'POST', url: 'auth/2-auth', data, formData: true}
+        );
     }
 
 }
