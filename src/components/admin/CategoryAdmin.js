@@ -5,7 +5,6 @@ import {Container, Row, Accordion, FormGroup, FormLabel, FormControl, Form, Butt
 
 import Error from "../Error";
 import Loading from "../Loading";
-import Navigation from "../Navigation";
 import WithServices from "../WithService";
 import {GetAccessToken, GetRefreshToken, GetSuperuserBoolStatus} from "../../Tokens";
 
@@ -48,7 +47,6 @@ const CategoryAdmin = ({Service}) => {
     if (loading) {
         return (
             <>
-                <Navigation/>
                 <Loading/>
             </>
         );
@@ -57,7 +55,6 @@ const CategoryAdmin = ({Service}) => {
     if (error) {
         return (
             <>
-                <Navigation/>
                 <Error/>
             </>
         );
@@ -93,8 +90,7 @@ const CategoryAdmin = ({Service}) => {
 
     return (
         <>
-            <Navigation/>
-            <Container className="mt-3">
+            <Container>
                 <Row>
                     <h1 className="text-center">Categories</h1>
 
@@ -175,7 +171,7 @@ const CategoryAdmin = ({Service}) => {
                                             </Accordion.Body>
                                         </Accordion.Item>
                                     ))
-                                ) : (<h3 className="text-center">Categories not found</h3>)
+                                ) : (<h3 className="text-center" style={{color: '#fff'}}>Categories not found</h3>)
                             }
                         </Accordion>
                     </div>
