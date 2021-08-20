@@ -122,6 +122,14 @@ export default class Services {
         return await this.httpRequest({method: 'GET', url: 'categories/'});
     }
 
+    removeCategory = async (id, token) => {
+        return await this.httpRequest({method: 'DELETE', url: `categories/${id}`, token});
+    }
+
+    createCategory = async (token, data) => {
+        return await this.httpRequest({method: 'POST', url: 'categories/', token, data});
+    }
+
     categoryVideos = async (category_id) => {
         return await this.httpRequest(
             {method: 'GET', url: `categories/videos/${category_id}`}
