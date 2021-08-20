@@ -16,14 +16,12 @@ import ChangeProfile from "./components/ChangeProfile";
 import Subscriptions from "./components/Subscriptions";
 import ResetPassword from "./components/ResetPassword";
 import ResetPasswordRequest from "./components/ResetPasswordRequest";
-import CategoryAdmin from "./components/admin/CategoryAdmin";
 
 const App = () => {
 
     return (
         <div className="App">
             <Switch>
-                <Route exact path='/admin/categories' component={CategoryAdmin}/>
                 <Route exact path='/admin' component={Admin}/>
                 <Route exact path='/search' component={Search}/>
                 <Route exact path='/username' component={GetUsername}/>
