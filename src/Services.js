@@ -130,6 +130,12 @@ export default class Services {
         return await this.httpRequest({method: 'POST', url: 'categories/', token, data});
     }
 
+    updateCategory = async (pk, token, data) => {
+        return await this.httpRequest(
+            {method: 'PUT', url: `categories/${pk}`, token, data}
+        );
+    }
+
     categoryVideos = async (category_id) => {
         return await this.httpRequest(
             {method: 'GET', url: `categories/videos/${category_id}`}

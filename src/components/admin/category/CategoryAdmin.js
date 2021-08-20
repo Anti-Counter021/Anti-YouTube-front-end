@@ -71,6 +71,20 @@ const CategoryAdmin = ({Service}) => {
             .catch(error => setError(true));
     };
 
+    const updateCategory = async (event, pk) => {
+        event.preventDefault();
+
+        const data = Object.fromEntries(new FormData(event.target).entries());
+
+        await Service.updateCategory(pk, GetAccessToken(), data)
+            .then(async res => {
+                await getCategories();
+                setShowSuccess(true);
+                document.querySelector('#success').textContent = 'Category has been updated';
+            })
+            .catch(error => setError(true));
+    }
+
     return (
         <>
             <Navigation/>
@@ -107,39 +121,59 @@ const CategoryAdmin = ({Service}) => {
                         </Accordion.Item>
                     </Accordion>
                 </Row>
+
                 <Row>
                     <div className="col-md-2"/>
-                    <div className="col-md-8">
+                    <div className="col-md-8 mt-2">
                         {
                             categories.length ? (
-                                <>
-                                    <hr/>
-                                    {
-                                        categories.map(({id, name}) => (
-                                            <>
-                                                <div className="col-md-8 h4" key={id}>
-                                                    {name}
-                                                    <div style={{float: 'right'}}>
-                                                        {/*<Button*/}
-                                                        {/*    onClick={() => removeCategory(id)}*/}
-                                                        {/*    variant="outline-danger"*/}
-                                                        {/*>*/}
-                                                        {/*    Update*/}
-                                                        {/*</Button>*/}
-                                                        <Button
-                                                            style={{marginLeft: '3px'}}
-                                                            onClick={() => removeCategory(id)}
-                                                            variant="danger"
-                                                        >
-                                                            Delete
-                                                        </Button>
+                                categories.map(({id, name}) => (
+                                    <>
+                                        <Accordion>
+                                            <Accordion.Item eventKey="0">
+                                                <Accordion.Header>
+                                                    <div className="col-md-8 h4" key={id}>
+                                                        {name}
                                                     </div>
-                                                </div>
-                                                <hr/>
-                                            </>
-                                        ))
-                                    }
-                                </>
+                                                </Accordion.Header>
+                                                <Accordion.Body>
+                                                    <Form
+                                                        onSubmit={
+                                                            (event) => updateCategory(
+                                                                event, id
+                                                            )
+                                                        }
+                                                    >
+                                                        <FormGroup>
+                                                            <FormLabel>
+                                                                Category name<span className="required">*</span>
+                                                            </FormLabel>
+                                                            <FormControl
+                                                                placeholder="Category name"
+                                                                required
+                                                                name="name"
+                                                                defaultValue={name}
+                                                                type="text"
+                                                            />
+                                                        </FormGroup>
+                                                        <Button className="mt-2" variant="success" type="submit">
+                                                            Update
+                                                        </Button>
+                                                        <div style={{float: 'right'}} className="mt-2">
+                                                            <Button
+                                                                style={{marginLeft: '3px'}}
+                                                                onClick={() => removeCategory(id)}
+                                                                variant="danger"
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                        </div>
+                                                    </Form>
+                                                </Accordion.Body>
+                                            </Accordion.Item>
+                                        </Accordion>
+                                    </>
+                                ))
                             ) : (<h3 className="text-center">Categories not found</h3>)
                         }
                     </div>
