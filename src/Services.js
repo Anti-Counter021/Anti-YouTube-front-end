@@ -1,4 +1,4 @@
-import {deleteTokens, GetRefreshToken, setTokens, GetUserId} from "./Tokens";
+import {deleteTokens, GetRefreshToken, setTokens, GetUserId, GetSuperuserStatus} from "./Tokens";
 
 const SITE = 'http://localhost:8000/api/v1/'
 
@@ -38,6 +38,7 @@ export default class Services {
             if (res.status === 401) {
                 const refresh_token = GetRefreshToken();
                 const user_id = GetUserId();
+                const is_superuser = GetSuperuserStatus();
                 if (refresh_token) {
                     deleteTokens();
                     return await this.httpRequest(
@@ -47,7 +48,14 @@ export default class Services {
                     )
                         .then(async res => {
                             if (res.access_token) {
-                                await setTokens({...res, 'refresh_token': refresh_token, 'user_id': user_id});
+                                await setTokens(
+                                    {
+                                        ...res,
+                                        'refresh_token': refresh_token,
+                                        'user_id': user_id,
+                                        'is_superuser': is_superuser,
+                                    }
+                                );
                                 return await this.httpRequest(
                                     {method, url, token: res.access_token, data, formData}
                                 );

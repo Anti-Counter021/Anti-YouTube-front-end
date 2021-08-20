@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 
+import {Redirect} from "react-router-dom";
 import {Container, Row, Accordion, FormGroup, FormLabel, FormControl, Form, Button, Alert} from "react-bootstrap";
 
 import Error from "../../Error";
 import Loading from "../../Loading";
 import Navigation from "../../Navigation";
 import WithServices from "../../WithService";
-import {GetAccessToken} from "../../../Tokens";
+import {GetAccessToken, GetRefreshToken, GetSuperuserBoolStatus} from "../../../Tokens";
 
 const CategoryAdmin = ({Service}) => {
 
@@ -28,6 +29,11 @@ const CategoryAdmin = ({Service}) => {
     useEffect(async () => {
         await getCategories();
     }, []);
+
+    if (!GetRefreshToken() || !GetSuperuserBoolStatus()) {
+        console.log('fff')
+        return (<Redirect to="/"/>);
+    }
 
     const removeCategory = async (id) => {
         await Service.removeCategory(id, GetAccessToken())
