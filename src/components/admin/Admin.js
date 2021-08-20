@@ -1,12 +1,17 @@
 import React from "react";
 
-import {Link} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {Accordion, Container, Row} from "react-bootstrap";
 
 import Navigation from "../Navigation";
 import CategoryAdmin from "./CategoryAdmin";
+import {GetRefreshToken, GetSuperuserBoolStatus} from "../../Tokens";
 
 const Admin = () => {
+
+    if (!GetRefreshToken() || !GetSuperuserBoolStatus()) {
+        return (<Redirect to="/"/>);
+    }
 
     return (
         <>
