@@ -11,11 +11,13 @@ import {deleteTokens, GetRefreshToken, GetSuperuserBoolStatus, GetUserId} from "
 const Navigation = ({Service}) => {
 
     const [auth, setAuth] = useState(false);
+    const [superuser, setSuperuser] = useState(false);
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         if (GetRefreshToken()) {
             setAuth(true);
+            setSuperuser(GetSuperuserBoolStatus());
         }
     });
 
@@ -92,7 +94,7 @@ const Navigation = ({Service}) => {
                                     <>
                                         <NavLink><Link className="link" to="/subscriptions">Subscriptions</Link></NavLink>
                                         {
-                                            GetSuperuserBoolStatus() ? (
+                                            superuser ? (
                                                 <NavLink><Link className="link" to="/admin">Admin</Link></NavLink>
                                             ) : null
                                         }

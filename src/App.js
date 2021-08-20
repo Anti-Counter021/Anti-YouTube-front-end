@@ -10,6 +10,7 @@ import Activate from "./components/Activate";
 import Category from "./components/Category";
 import Admin from "./components/admin/Admin";
 import Register from "./components/Register";
+import Error404 from "./components/error/404";
 import AddVideos from "./components/AddVideos";
 import GetUsername from "./components/GetUsername";
 import ChangeProfile from "./components/ChangeProfile";
@@ -37,7 +38,9 @@ const App = () => {
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/subscriptions' component={Subscriptions}/>
                 <Route exact path='/profile/change' component={ChangeProfile}/>
-                <Route path='/' component={Home}/>
+                <Route exact path='/' component={Home}/>
+                <Route exact path='/404' component={Error404}/>
+                <Route path='/' component={Error404}/>
             </Switch>
         </div>
     );
