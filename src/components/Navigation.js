@@ -6,7 +6,7 @@ import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import {Container, Nav, Navbar, NavbarBrand, NavDropdown, NavLink} from "react-bootstrap";
 
 import WithServices from "./WithService";
-import {deleteTokens, GetRefreshToken, GetUserId} from "../Tokens";
+import {deleteTokens, GetRefreshToken, GetSuperuserBoolStatus, GetUserId} from "../Tokens";
 
 const Navigation = ({Service}) => {
 
@@ -89,7 +89,14 @@ const Navigation = ({Service}) => {
 
                             {
                                 auth ? (
-                                    <NavLink><Link className="link" to="/subscriptions">Subscriptions</Link></NavLink>
+                                    <>
+                                        <NavLink><Link className="link" to="/subscriptions">Subscriptions</Link></NavLink>
+                                        {
+                                            GetSuperuserBoolStatus() ? (
+                                                <NavLink><Link className="link" to="/admin">Admin</Link></NavLink>
+                                            ) : null
+                                        }
+                                    </>
                                 ) : null
                             }
 

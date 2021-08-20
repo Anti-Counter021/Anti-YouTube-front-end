@@ -8,6 +8,7 @@ import History from "./components/History";
 import Channel from "./components/Channel";
 import Activate from "./components/Activate";
 import Category from "./components/Category";
+import Admin from "./components/admin/Admin";
 import Register from "./components/Register";
 import AddVideos from "./components/AddVideos";
 import GetUsername from "./components/GetUsername";
@@ -15,7 +16,7 @@ import ChangeProfile from "./components/ChangeProfile";
 import Subscriptions from "./components/Subscriptions";
 import ResetPassword from "./components/ResetPassword";
 import ResetPasswordRequest from "./components/ResetPasswordRequest";
-import CategoryAdmin from "./components/admin/category/CategoryAdmin";
+import CategoryAdmin from "./components/admin/CategoryAdmin";
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
         <div className="App">
             <Switch>
                 <Route exact path='/admin/categories' component={CategoryAdmin}/>
+                <Route exact path='/admin' component={Admin}/>
                 <Route exact path='/search' component={Search}/>
                 <Route exact path='/username' component={GetUsername}/>
                 <Route exact path='/history' component={History}/>

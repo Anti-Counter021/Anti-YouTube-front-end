@@ -3,11 +3,11 @@ import React, {useState, useEffect} from "react";
 import {Redirect} from "react-router-dom";
 import {Container, Row, Accordion, FormGroup, FormLabel, FormControl, Form, Button, Alert} from "react-bootstrap";
 
-import Error from "../../Error";
-import Loading from "../../Loading";
-import Navigation from "../../Navigation";
-import WithServices from "../../WithService";
-import {GetAccessToken, GetRefreshToken, GetSuperuserBoolStatus} from "../../../Tokens";
+import Error from "../Error";
+import Loading from "../Loading";
+import Navigation from "../Navigation";
+import WithServices from "../WithService";
+import {GetAccessToken, GetRefreshToken, GetSuperuserBoolStatus} from "../../Tokens";
 
 const CategoryAdmin = ({Service}) => {
 
