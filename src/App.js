@@ -12,6 +12,7 @@ import Admin from "./components/admin/Admin";
 import Register from "./components/Register";
 import Error404 from "./components/error/404";
 import AddVideos from "./components/AddVideos";
+import GoogleAuth from "./components/GoogleAuth";
 import GetUsername from "./components/GetUsername";
 import ChangeProfile from "./components/ChangeProfile";
 import Subscriptions from "./components/Subscriptions";
@@ -23,6 +24,7 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
+                <Route path='/google-auth' component={GoogleAuth}/>
                 <Route exact path='/admin' component={Admin}/>
                 <Route exact path='/search' component={Search}/>
                 <Route exact path='/username' component={GetUsername}/>

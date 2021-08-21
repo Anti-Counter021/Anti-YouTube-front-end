@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Redirect} from "react-router-dom";
 import {Form, FormGroup, Container, Row, FormLabel, FormControl, Button, Alert, Modal} from "react-bootstrap";
 
+import {SITE} from "../Services";
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
 import {GetRefreshToken, setTokens} from "../Tokens";
@@ -153,6 +154,19 @@ const Login = ({Service}) => {
                         </Button>
 
                     </Form>
+                </Row>
+                <Row>
+                    <div className="col-md-2"/>
+                    <div className="col-md-8 text-center mt-3">
+                        <Button
+                            onClick={() => {
+                                window.location.href = `${SITE}auth/google-login`;
+                            }}
+                            variant="outline-danger"
+                        >
+                            <i className="fab fa-google"/> Google auth
+                        </Button>
+                    </div>
                 </Row>
             </Container>
         </>
