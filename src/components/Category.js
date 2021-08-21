@@ -72,7 +72,7 @@ const Category = ({Service}) => {
                             }
                         </Row>
                     </Container>
-                ) : null
+                ) : (<h2 className="text-center">No video yet</h2>)
             }
         </>
     );
