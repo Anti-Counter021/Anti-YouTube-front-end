@@ -45,6 +45,7 @@ const Navigation = ({Service}) => {
                     <NavbarCollapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <NavLink><Link className="link" to="/">Home</Link></NavLink>
+                            <NavLink><Link className="link" to="/trends">Trends</Link></NavLink>
                             <NavDropdown id="auth-dropdown" title="Auth">
 
                                 {
@@ -113,10 +114,10 @@ const Navigation = ({Service}) => {
                                     <Link className="link" to="/videos/add"><i className="fas fa-file-video"/></Link>
                                 </NavLink>
                                 <NavLink>
-                                    <Link className="link" to="/profile/change"><i className="fas fa-user-circle"/></Link>
+                                    <Link className="link" to="/profile/change"><i className="fas fa-id-card"/></Link>
                                 </NavLink>
                                 <NavLink>
-                                    <Link className="link" to={`/channel/${GetUserId()}`}><i className="fas fa-id-card"/></Link>
+                                    <Link className="link" to={`/channel/${GetUserId()}`}><i className="fas fa-user-circle"/></Link>
                                 </NavLink>
                             </NavbarCollapse>
                         ) : null

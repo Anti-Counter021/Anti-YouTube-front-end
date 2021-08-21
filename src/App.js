@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Video from "./components/Video";
 import Login from "./components/Login";
 import Search from "./components/Search";
+import Trends from "./components/Trends";
 import History from "./components/History";
 import Channel from "./components/Channel";
 import Activate from "./components/Activate";
@@ -24,6 +25,7 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
+                <Route exact path="/trends" component={Trends}/>
                 <Route path='/google-auth' component={GoogleAuth}/>
                 <Route exact path='/admin' component={Admin}/>
                 <Route exact path='/search' component={Search}/>

@@ -240,4 +240,8 @@ export default class Services {
         return await this.httpRequest({method: 'GET', url: 'auth/2-auth-toggle', token});
     }
 
+    trends = async () => {
+        return this.httpRequest({method: 'GET', url: 'videos/trends'});
+    }
+
 }
