@@ -119,6 +119,9 @@ const Navigation = ({Service}) => {
                                 <NavLink>
                                     <Link className="link" to={`/channel/${GetUserId()}`}><i className="fas fa-user-circle"/></Link>
                                 </NavLink>
+                                <NavLink>
+                                    <Link className="link" to="/export"><i className="fas fa-file-export"/></Link>
+                                </NavLink>
                             </NavbarCollapse>
                         ) : null
                     }

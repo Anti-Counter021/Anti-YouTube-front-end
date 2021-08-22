@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import {Button, Container, Row, ProgressBar} from "react-bootstrap";
+import {Button, Container, Row, ProgressBar, Alert} from "react-bootstrap";
 
 import Navigation from "./Navigation";
 import WithServices from "./WithService";
@@ -17,6 +17,7 @@ class ExportData extends Component {
 
     state = {
         value: 0,
+        show: true,
     }
 
     onMessage = (ev) => {
@@ -30,6 +31,7 @@ class ExportData extends Component {
             const {ws, interval} = this.state;
             ws.close();
             clearInterval(interval);
+            document.querySelector('#success').textContent = 'Check your email'
         }
     }
 
@@ -40,7 +42,8 @@ class ExportData extends Component {
             ws,
             interval: setInterval(() => ws.send(id), 1000),
             value: '0',
-        })
+            show: false,
+        });
     }
 
     exportData = async () => {
@@ -58,9 +61,18 @@ class ExportData extends Component {
             <>
                 <Navigation/>
                 <Container className="mt-3">
-                    <Row>
-                        <h1 className="text-center">Export data</h1>
-                        <Button variant="success" onClick={this.exportData}>Click</Button>
+                    <Row className="text-center">
+                        <h1>Export data</h1>
+                        {
+                            this.state.show ? (
+                                <Button variant="success" onClick={this.exportData}>Click</Button>
+                            ) : (
+                                <Alert variant="success">
+                                    <p id="success">Loading...</p>
+                                </Alert>
+                            )
+                        }
+                        <h4 className="mt-2">Progress</h4>
                         <ProgressBar
                             animated
                             defaultValue={0}
