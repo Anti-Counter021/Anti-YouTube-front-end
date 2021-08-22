@@ -241,7 +241,11 @@ export default class Services {
     }
 
     trends = async () => {
-        return this.httpRequest({method: 'GET', url: 'videos/trends'});
+        return await this.httpRequest({method: 'GET', url: 'videos/trends'});
+    }
+
+    exportDataRequest = async (token) => {
+        return await this.httpRequest({method: 'POST', url: 'auth/export', token});
     }
 
 }
