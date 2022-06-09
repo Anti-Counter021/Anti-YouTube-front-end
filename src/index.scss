@@ -1,0 +1,139 @@
+.link, #auth-dropdown, #categories-dropdown {
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.admin-accordion {
+    background: #dc3545;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ec3e89;
+    margin: 20px 0;
+}
+
+.card {
+    background: #dc2535;
+    -webkit-box-shadow: 0px 4px 15px 3px rgba(0, 0, 0, 0.82);
+    box-shadow: 0px 4px 15px 3px rgba(0, 0, 0, 0.82);
+    color: #fff;
+    border-radius: 10px;
+}
+
+.fa-user-circle, .fa-file-video, .fa-id-card, .fa-file-export {
+    font-size: 25px;
+}
+
+.fa-thumbs-up, .fa-thumbs-down {
+    margin-left: 7px;
+}
+
+.video-container {
+    background: #dc3545;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+
+    h1, h2, h3, h4, h5, h6, p {
+        color: #fff;
+        margin: 20px 0;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+
+    &:hover {
+        color: #000;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.reply {
+    background: #dc2535;
+    color: #fff;
+    border-radius: 10px;
+    padding: 7px;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.comment-form {
+    margin-top: 7px;
+}
+
+.required {
+    color: #e50707;
+}
+
+.avatar-big {
+    margin-top: 15px;
+    max-width: 400px;
+    max-height: 400px;
+    -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.78);
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.78);
+}
+
+.error {
+    padding: 10px;
+}
+
+.avatar {
+    max-width: 80px;
+    max-height: 80px;
+    margin: 0 20px;
+}
+
+.card-img-top.avatar {
+    margin: 10px auto;
+}
+
+#error {
+    color: #000;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.thumbnail {
+    width: 250px;
+    height: 230px;
+    padding: 8px;
+    
+    &-block {
+        text-align: center;
+    }
+}
+
+.video {
+    background: #0a0a0a;
+    padding: 10px;
+    border-radius: 15px;
+    -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+
+#like, #dislike {
+    cursor: pointer;
+}
+
+@media (max-width: 525px) {
+    .avatar-big {
+        max-width: 300px;
+        max-height: 300px;
+    }
+}
